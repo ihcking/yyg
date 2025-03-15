@@ -1,0 +1,78 @@
+<!-- members/1.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨染 - 御音阁声优档案</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C5CE7;
+            --secondary-color: #FFD700;
+            --bg-gradient: linear-gradient(135deg, #2D3436 0%, #6C5CE7 100%);
+        }
+
+        .member-detail-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 2rem;
+        }
+
+        .profile-header {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .voice-demo-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <!-- 与主站相同的导航栏 -->
+    </nav>
+
+    <main class="member-detail-container">
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <img src="/members/1-avatar.jpg" alt="墨染" 
+                     style="width:100%;border-radius:50%;border:3px solid var(--secondary-color);">
+            </div>
+            <div class="profile-info">
+                <h1>墨染</h1>
+                <div class="profile-meta">
+                    <span class="title">首席声优</span>
+                    <span class="join-date">🎤 加入时间：2019年</span>
+                </div>
+                <div class="social-links" style="margin-top:1rem;">
+                    <a href="#" class="social-icon"><i class="fab fa-bilibili"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="voice-demo-card">
+            <h2>声线试听</h2>
+            <audio controls style="width:100%;margin-top:1rem;">
+                <source src="/voice/moran-demo.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <a href="/" class="back-button" style="/* 与作品页相同样式 */">
+            ← 返回团队列表
+        </a>
+    </main>
+
+    <footer class="footer">
+        <!-- 与主站相同的页脚内容 -->
+    </footer>
+</body>
+</html>

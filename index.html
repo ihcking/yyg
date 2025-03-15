@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>御音阁 - 声动山河，音绘万象</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C5CE7;
+            --secondary-color: #FFD700;
+            --bg-gradient: linear-gradient(135deg, #2D3436 0%, #6C5CE7 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '微软雅黑', sans-serif;
+            color: white;
+            line-height: 1.8;
+            background: var(--bg-gradient);
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(44, 44, 44, 0.97);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(0, 0, 0, 0.98);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 180px;
+            height: 50px;
+            background: url('logo.png') center/contain no-repeat;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-left: auto;
+            padding-right: 2rem;
+        }
+
+        .social-icon {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Banner */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: url('banner.jpg') center/cover;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 模块标题特效 */
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin: 4rem 0;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 2rem;
+            background: linear-gradient(45deg, 
+                var(--secondary-color) 25%,
+                var(--primary-color) 75%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleShine 3s infinite;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 80%;
+            height: 3px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--primary-color);
+            animation: linePulse 2s infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes linePulse {
+            0%, 100% { opacity: 0.8; width: 80%; }
+            50% { opacity: 1; width: 100%; }
+        }
+
+        /* 作品展示 */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .work-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .work-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .work-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .work-card {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .work-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .work-hover {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(108,92,231,0.9);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            opacity: 0;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .work-card:hover .work-hover {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* 成员展示 */
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .member-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .member-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .member-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .member-card {
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .member-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: rgba(0,0,0,0.7);
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .member-card:hover .member-info {
+            transform: translateY(0);
+        }
+
+        .member-more {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(108,92,231,0.9);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .member-card:hover .member-more {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* 关于我们 */
+        .about-section {
+            padding: 6rem 2rem;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding-right: 2rem;
+        }
+
+        .about-image {
+            background: url('about-bg.jpg') center/cover;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .about-link {
+            display: block;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-link:hover {
+            transform: scale(1.02);
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .about-link::after {
+            content: "点击了解详情";
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .about-link:hover::after {
+            opacity: 1;
+            bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* 联系我们 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        /* 底部 */
+        footer {
+            background: rgba(0,0,0,0.9);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .friend-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .friend-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            text-align: center;
+            padding: 1rem;
+            transition: 0.3s;
+        }
+
+        .friend-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            opacity: 0.8;
+            margin-top: 2rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .social-icons {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .contact-grid,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-text {
+                padding-right: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo"></a>
+            <div class="nav-links">
+                <a href="#works">作品中心</a>
+                <a href="#members">声优团队</a>
+                <a href="#about">关于我们</a>
+                <a href="#contact">联系我们</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-bilibili"></i></a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>声动山河<span>🎙</span>音绘万象</h1>
+            <p>用声音演绎万千世界</p>
+        </div>
+    </section>
+
+    <section id="works">
+        <h2 class="section-title">代表作品</h2>
+        <div class="work-grid">
+            <a href="/works/1.html" class="work-link">
+                <div class="work-card" style="background-image: url('work1.jpg')">
+                    <div class="work-info">
+                        <h3>《山河故人》</h3>
+                        <p>古风权谋广播剧</p>
+                    </div>
+                    <div class="work-hover">点击查看详情</div>
+                </div>
+            </a>
+            <!-- 添加更多作品 -->
+        </div>
+    </section>
+
+    <section id="members">
+        <h2 class="section-title">核心团队</h2>
+        <div class="member-grid">
+            <a href="/members/1.html" class="member-link">
+                <div class="member-card" style="background-image: url('member1.jpg')">
+                    <div class="member-info">
+                        <h3>声优 - 墨染</h3>
+                        <p>代表作：《无限流游戏》</p>
+                    </div>
+                    <div class="member-more">查看详细档案</div>
+                </div>
+            </a>
+            <!-- 添加更多成员 -->
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2 class="section-title">关于我们</h2>
+        <div class="container">
+            <div class="about-content" data-scroll>
+                <div class="about-text">
+                    <h3>声创未来 · 音你精彩</h3>
+                    <p>御音阁成立于2018年，是中国领先的互联网配音社团。我们汇聚了200+专业声优，累计制作500+部有声作品，全网播放量突破10亿次。</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="6">6+</div>
+                            <p>年行业经验</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="500">500+</div>
+                            <p>部精品作品</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="200">200+</div>
+                            <p>专业声优</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="about-detail.html" class="about-link" aria-label="查看详细团队介绍">
+                    <div class="about-image"></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">联系我们</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>工作室地址</h3>
+                        <p>北京市朝阳区文化创意产业园A座12层</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>联系电话</h3>
+                        <p>010-6688 7766（工作日 9:00-18:00）</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>电子邮件</h3>
+                        <p>business@yuyinge.com（商务合作）</p>
+                        <p>service@yuyinge.com（客户服务）</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div>
+                        <h3>社交媒体</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-weixin"></i></a>
+                            <a href="#"><i class="fab fa-weibo"></i></a>
+                            <a href="#"><i class="fab fa-bilibili"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="friend-links">
+            <a href="#">声创联盟</a>
+            <a href="#">729声工场</a>
+            <a href="#">音熊联萌</a>
+            <a href="#">光合积木</a>
+        </div>
+        <div class="copyright">
+            <p>© 2023 御音阁 版权所有</p>
+            <p>京ICP备12345678号-1</p>
+            <p>联系电话：010-66887766</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏交互
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // 移动端菜单
+        document.querySelector('.mobile-menu').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('show');
+        });
+
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // 标题悬停动画
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('mouseover', () => {
+                title.style.transform = `translateX(-50%) scale(1.1)`;
+            });
+            
+            title.addEventListener('mouseout', () => {
+                title.style.transform = `translateX(-50%) scale(1)`;
+            });
+        });
+
+        // 社交媒体提示
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('即将跳转到官方社交媒体页面');
+            });
+        });
+
+        // 跳转链接处理
+        document.querySelectorAll('.work-link, .member-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if(e.target.closest('.play-btn')) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // 统计数字动画
+        function animateNumbers() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-count');
+                    const count = +counter.innerText.replace('+','');
+                    const inc = target / speed;
+                    
+                    if(count < target) {
+                        counter.innerText = Math.ceil(count + inc) + '+';
+                        setTimeout(updateCount, 10);
+                    } else {
+                        counter.innerText = target + '+';
+                    }
+                }
+                updateCount();
+            });
+        }
+
+        // 关于我们模块观察
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    animateNumbers();
+                    aboutObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.about-content').forEach(el => aboutObserver.observe(el));
+
+        // 关于我们图片链接
+        document.querySelectorAll('.about-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(!e.target.closest('button')) {
+                    console.log('跳转到详细页面');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
