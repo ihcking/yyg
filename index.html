@@ -30,72 +30,153 @@
 <body class="slides chain simplifiedMobile animated">
 
 <style>
-.top_content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 10%;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-}
 
-.logo {
-    width: 120px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 25px; /* 用gap替代margin间隔 */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #007bff; /* 添加hover交互效果 */
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none; /* 移动端暂时隐藏导航 */
+/* 基础重置与全局样式 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-    
-    /* 可以在这里添加汉堡菜单的样式 */
-}
 
-/* 确保固定定位不遮挡内容 */
-body {
-    padding-top: 70px; /* 根据.top_content的高度调整 */
-}
+    body {
+        padding-top: 60px; /* 为固定导航留出空间 */
+    }
+
+    /* 导航容器 */
+    .top_content {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        z-index: 9999;
+    }
+
+    /* Logo样式 */
+    .logo img {
+        width: 120px;
+        height: auto;
+        display: block;
+    }
+
+    /* 桌面导航样式 */
+    .nav-links {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: #333;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+        color: #007bff;
+        background: rgba(0,123,255,0.1);
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .nav-links {
+            position: fixed;
+            top: 60px;
+            right: -100%;
+            width: 70%;
+            height: calc(100vh - 60px);
+            background: white;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links li {
+            width: 100%;
+            margin: 8px 0;
+        }
+
+        .nav-links a {
+            width: 100%;
+            padding: 12px !important;
+            border-radius: 6px;
+        }
+
+        /* 汉堡菜单 */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            height: 3px;
+            width: 100%;
+            background: #333;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    }
+
+    /* 桌面端隐藏汉堡菜单 */
+    .hamburger {
+        display: none;
+    }
+
+    /* 可选：菜单激活时锁定滚动 */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+	
 </style>
 
 <div class="top_content">
-  <a href="#" class="logo">
-    <img src="logo.png" alt="网站Logo">
-  </a>
-  
-  <ul class="nav-links">
-    <li><a href="#">首页</a></li>
-    <li><a href="#1">风采</a></li>
-    <li><a href="#2">成员</a></li>
-    <li><a href="#3">作品</a></li>
-    <li><a href="#4">关于</a></li>
-    <li><a href="https://docs.qq.com/form/page/DR0huaGdScGhNUHNW" target="_blank">申请加入</a></li>
-  </ul>
+    <a href="#" class="logo">
+        <img src="logo.png" alt="网站Logo">
+    </a>
+    
+    <ul class="nav-links">
+        <li><a href="#">首页</a></li>
+        <li><a href="#1">风采</a></li>
+        <li><a href="#2">成员</a></li>
+        <li><a href="#3">作品</a></li>
+        <li><a href="#4">关于</a></li>
+        <li><a href="https://docs.qq.com/form/page/DR0huaGdScGhNUHNW" 
+              target="_blank" 
+              class="apply-link">申请加入</a></li>
+    </ul>
 </div>
 		
 <!-- SVG Library -->
