@@ -176,7 +176,38 @@ html {
               class="apply-link">申请加入</a></li>
     </ul>
 </div>
-		
+
+<script>
+// 菜单切换逻辑
+function toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+// 点击菜单外区域关闭
+document.addEventListener('click', (e) => {
+    const nav = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    
+    if (!e.target.closest('.nav-links') && 
+        !e.target.closest('.hamburger') &&
+        nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+});
+
+// 窗口resize时重置菜单
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        document.querySelector('.nav-links').classList.remove('active');
+        document.querySelector('.hamburger').classList.remove('active');
+    }
+});
+</script>
+	
 <!-- SVG Library -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   
