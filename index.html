@@ -113,33 +113,33 @@ html {
 
 /* 移动端适配 */
 @media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
-
     .nav-links {
-        position: fixed;
+        width: 60%; /* 改为60%宽度 */
+        right: -60%; /* 初始隐藏位置 */
+        height: auto; /* 取消全屏高度 */
         top: 60px;
-        right: 0;
-        width: 100%;
-        height: calc(100vh - 60px);
-        background: white;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        transform: translateX(100%);
-        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        bottom: auto;
+        transform: none; /* 取消transform动画 */
+        box-shadow: -2px 5px 10px rgba(0,0,0,0.1);
+        border-radius: 0 0 0 8px;
+        max-width: 300px; /* 最大宽度限制 */
+        transition: right 0.3s ease; /* 改用right属性动画 */
     }
 
     .nav-links.active {
-        transform: translateX(0);
+        right: 0; /* 展开显示 */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
     }
 
     .nav-links a {
-        font-size: 18px;
-        padding: 12px 20px;
+        display: block;
+        padding: 15px;
     }
-
+}
     .apply-link {
         margin-top: 15px;
     }
@@ -178,33 +178,59 @@ html {
 </div>
 
 <script>
-// 菜单切换逻辑
+// 增强的JavaScript逻辑
 function toggleMenu() {
     const nav = document.querySelector('.nav-links');
-    const hamburger = document.querySelector('.hamburger');
     nav.classList.toggle('active');
-    hamburger.classList.toggle('active');
+    document.body.classList.toggle('nav-active'); // 用于添加遮罩
 }
 
-// 点击菜单外区域关闭
-document.addEventListener('click', (e) => {
-    const nav = document.querySelector('.nav-links');
-    const hamburger = document.querySelector('.hamburger');
-    
-    if (!e.target.closest('.nav-links') && 
-        !e.target.closest('.hamburger') &&
-        nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
+// 自动关闭菜单函数
+function closeMenu() {
+    document.querySelector('.nav-links').classList.remove('active');
+    document.body.classList.remove('nav-active');
+}
+
+// 点击菜单项自动关闭
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            closeMenu();
+        }
+    });
 });
 
-// 窗口resize时重置菜单
+// 添加遮罩层
+const overlay = document.createElement('div');
+overlay.className = 'nav-overlay';
+overlay.onclick = closeMenu;
+document.body.appendChild(overlay);
+
+// 遮罩样式
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 9998;
+}
+
+body.nav-active .nav-overlay {
+    display: block;
+}
+
+// 优化resize处理
+let resizeTimer;
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        document.querySelector('.nav-links').classList.remove('active');
-        document.querySelector('.hamburger').classList.remove('active');
-    }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
+    }, 100);
 });
 </script>
 	
