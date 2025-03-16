@@ -30,38 +30,71 @@
 <body class="slides chain simplifiedMobile animated">
 
 <style>
-.top_content{
-	position: fixed;
-    top: 30px;
+.top_content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 9999;
-}
-.top_content .logo{
-	position: inherit;
-    left: 5%;
-	width:120px;
-}
-.top_content .nav-links{
-	position: inherit;
-    right: 5%;
-}
-.top_content .nav-links li{
-    float: left;
-    margin: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
 }
 
-	
+.logo {
+    width: 120px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px; /* 用gap替代margin间隔 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #007bff; /* 添加hover交互效果 */
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* 移动端暂时隐藏导航 */
+    }
+    
+    /* 可以在这里添加汉堡菜单的样式 */
+}
+
+/* 确保固定定位不遮挡内容 */
+body {
+    padding-top: 70px; /* 根据.top_content的高度调整 */
+}
 </style>
+
 <div class="top_content">
-  <div class="logo">
-	<a href="#"><img src="logo.png"></a>
-  </div>
+  <a href="#" class="logo">
+    <img src="logo.png" alt="网站Logo">
+  </a>
+  
   <ul class="nav-links">
-    <li><a href="#" >首页</a></li>
+    <li><a href="#">首页</a></li>
     <li><a href="#1">风采</a></li>
     <li><a href="#2">成员</a></li>
     <li><a href="#3">作品</a></li>
-	<li><a href="#4">关于</a></li>
-	<li><a href="https://docs.qq.com/form/page/DR0huaGdScGhNUHNW">申请加入</a></li>	
+    <li><a href="#4">关于</a></li>
+    <li><a href="https://docs.qq.com/form/page/DR0huaGdScGhNUHNW" target="_blank">申请加入</a></li>
   </ul>
 </div>
 		
