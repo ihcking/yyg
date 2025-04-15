@@ -248,6 +248,48 @@
             color: #856404;
         }
 
+        /* 微信公众号二维码 */
+        .wechat-qrcode {
+            display: flex;
+            gap: 20px;
+        }
+
+        .wechat-qrcode-item {
+            text-align: center;
+            width: 120px; /* 设置容器为正方形 */
+        }
+
+        .wechat-qrcode-item img {
+            width: 120px; /* 设置二维码为正方形 */
+            height: 120px; /* 设置二维码为正方形 */
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        /* 媒体平台图标 */
+        .social-platforms {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-platforms a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-platforms a:hover {
+            background: var(--gradient-bg);
+            transform: translateY(-3px);
+        }
+
         /* 页脚 */
         footer {
             background-color: var(--dark-color);
@@ -365,7 +407,6 @@
                     <li><a href="index.html#works">作品展示</a></li>
                     <li><a href="index.html#events">活动日历</a></li>
                     <li><a href="index.html#contact">联系我们</a></li>
-					<li><a href="index.html">皇宸 · 潇府 · 御音阁</a></li>
                 </ul>
             </nav>
         </div>
@@ -465,25 +506,35 @@
                 <div class="footer-column">
                     <h3>御音阁</h3>
                     <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="about.html">关于我们</a></li>
-                    <li><a href="index.html#news">最新动态</a></li>
-                    <li><a href="recruitment.html">招新公告</a></li>
-                    <li><a href="members.html">成员查询</a></li>
-                    <li><a href="index.html#works">作品展示</a></li>
-                    <li><a href="index.html#events">活动日历</a></li>
-                    <li><a href="index.html#contact">联系我们</a></li>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="index.html#news">最新动态</a></li>
+                        <li><a href="recruitment.html">招新公告</a></li>
+                        <li><a href="members.html">成员查询</a></li>
+                        <li><a href="index.html#works">作品展示</a></li>
+                        <li><a href="index.html#events">活动日历</a></li>
+                        <li><a href="index.html#contact">联系我们</a></li>
+                        <li><a href="index.html">皇宸 · 潇府 · 御音阁</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>友链</h3>
+                    <h3>皇宸</h3>
                     <ul>
                         <li><a href="#">皇宸总部</a></li>
                         <li><a href="#">皇宸部落</a></li>
                         <li><a href="#">乾龙公会</a></li>
                         <li><a href="#">卿城家族</a></li>
                         <li><a href="#">枫谷师门</a></li>
-						<li><a href="#">潇府</a></li>
+                        <li><a href="#">潇府</a></li>
+                        <li><a href="#">逸阁</a></li>
+                        <li><a href="#">卿阁</a></li>
+                        <li><a href="#">枫阁</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>友链</h3>
+                    <ul>
+                        <li><a href="#">潇府</a></li>
                         <li><a href="#">逸阁</a></li>
                         <li><a href="#">卿阁</a></li>
                         <li><a href="#">枫阁</a></li>
@@ -494,16 +545,33 @@
                     <ul>
                         <li><a href="#">🐧 3010662388</a></li>
                         <li><a href="#">📧 hc@ihcking.com</a></li>
-                        <li><a href="https://yyg.ihcking.com/">📍 御音阁官网</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>关注我们</h3>
-                    <div class="social-links">
-                        <a href="#"><i>微</i></a>
-                        <a href="#"><i>博</i></a>
-                        <a href="#"><i>抖</i></a>
-                        <a href="#"><i>B</i></a>
+                    <div class="wechat-qrcode">
+                        <div class="wechat-qrcode-item">
+                            <img src=".\assets\img\xfdyh.jpg" alt="微信公众号1">
+                            <p>潇府订阅号</p>
+                        </div>
+                        <div class="wechat-qrcode-item">
+                            <img src=".\assets\img\hcwfh.jpg" alt="微信公众号2">
+                            <p>皇宸服务号</p>
+                        </div>
+                    </div>
+                    <div class="social-platforms">
+                        <a href="#" title="哔哩哔哩">
+                            <i>B</i>
+                        </a>
+                        <a href="#" title="微博">
+                            <i>微</i>
+                        </a>
+                        <a href="#" title="抖音">
+                            <i>抖</i>
+                        </a>
+                        <a href="#" title="网易云音乐">
+                            <i>云</i>
+                        </a>
                     </div>
                 </div>
             </div>
