@@ -672,7 +672,7 @@
                         <div class="audio-player">
                             <div class="audio-controls">
                                 <button id="play-btn" class="play-btn">▶</button>
-                                <button id="pause-btn" class="pause-btn">⏸</button>
+                                <button id="pause-btn" class="pause-btn">⬜</button>
                             </div>
                             <div class="audio-info">
                                 <p>PIA戏背景音乐 - BGM</p>
@@ -856,11 +856,11 @@
                     <h3>关注我们</h3>
                     <div class="wechat-qrcode">
                         <div class="wechat-qrcode-item">
-                            <img src=".\assets\img\xfdyh.jpg" alt="微信公众号1">
+                            <img src="./assets/img/xfdyh.jpg" alt="微信公众号1">
                             <p>潇府订阅号</p>
                         </div>
                         <div class="wechat-qrcode-item">
-                            <img src=".\assets\img\hcwfh.jpg" alt="微信公众号2">
+                            <img src="./assets/img/hcwfh.jpg" alt="微信公众号2">
                             <p>皇宸服务号</p>
                         </div>
                     </div>
@@ -889,7 +889,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // 音乐播放器功能
-            const audio = new Audio('https://www.doubao.com/drive/s/195f571297685a3c/御音阁-萌新本-BGM.mp3'); // 替换为实际的音频文件URL
+            const audio = new Audio('./assets/audition/御音阁-萌新本-BGM.mp3'); // 替换为实际的音频文件URL
             const playBtn = document.getElementById('play-btn');
             const pauseBtn = document.getElementById('pause-btn');
             const progressBar = document.querySelector('.progress-bar');
