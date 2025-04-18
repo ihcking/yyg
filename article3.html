@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>御音阁 - 基础考核本</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary-color: #8e2de2;
+            --secondary-color: #4a00e0;
+            --accent-color: #e94057;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            --gradient-progress: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: rgba(26, 26, 46, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-bg);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 页眉 */
+        .header-banner {
+            height: 400px;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 800px;
+        }
+
+        .header-content h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .header-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* 招新公告 */
+        .recruitment-section {
+            padding: 100px 0;
+            background-color: white;
+            margin-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-bg);
+        }
+
+        .recruitment-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            align-self: flex-start;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        .script-info {
+            margin-bottom: 20px;
+        }
+
+        .script-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .script-info-item i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .more-works {
+            margin-top: 30px;
+        }
+
+        .more-works-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+            margin-top: 15px;
+        }
+
+        .more-works-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6);
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 音频播放器 */
+        .audio-player-container {
+            width: 100%;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+        }
+
+        .audio-player {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .audio-info {
+            margin-bottom: 10px;
+        }
+
+        .audio-info p {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-progress);
+            border-radius: 5px;
+            width: 0;
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .audio-controls button {
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .audio-controls button:hover {
+            transform: scale(1.1);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .volume-control input {
+            width: 80px;
+            margin-left: 5px;
+        }
+
+        .playlist-toggle {
+            margin-left: auto;
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .playlist-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .playlist {
+            max-height: 0;
+            overflow-y: hidden;
+            transition: max-height 0.3s ease;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .playlist.open {
+            max-height: 300px;
+        }
+
+        .playlist-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .playlist-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .playlist-item.active {
+            background-color: rgba(142, 45, 226, 0.1);
+            font-weight: bold;
+        }
+
+        /* 视频播放器 */
+        .video-player-container {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .video-player {
+            width: 100%;
+            background: #000;
+        }
+
+        .video-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .play-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-icon::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
+        }
+
+        /* 文字特效 */
+        .text-effect {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .text-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: -1;
+            opacity: 0.3;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            transition: all 0.3s ease;
+        }
+
+        .text-effect:hover::after {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-bg);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--gradient-bg);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+		
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .warning strong {
+            color: #856404;
+        }
+		
+        /* 微信公众号二维码 */
+        .wechat-qrcode {
+            display: flex;
+            gap: 20px;
+        }
+
+        .wechat-qrcode-item {
+            text-align: center;
+            width: 120px; /* 设置容器为正方形 */
+        }
+
+        .wechat-qrcode-item img {
+            width: 120px; /* 设置二维码为正方形 */
+            height: 120px; /* 设置二维码为正方形 */
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .wechat-qrcode-item p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* 媒体平台图标 */
+        .social-platforms {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-platforms a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-platforms a:hover {
+            background: var(--gradient-bg);
+            transform: translateY(-3px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .header-content h2 {
+                font-size: 32px;
+            }
+            
+            .header-content p {
+                font-size: 16px;
+            }
+            
+            .recruitment-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 交互式标签 */
+        .interactive-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-size: 12px;
+        }
+
+        .interactive-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* 角色选择器 */
+        .character-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px dashed var(--primary-color);
+        }
+
+        .character-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .character-option {
+            padding: 8px 15px;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .character-option:hover, .character-option.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 更多分类和剧本标签间距 */
+        .category-tags {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHptMy41LTljLjgzIDAgMS41LS42NyAxLjUtMS41UzE2LjMzIDggMTUuNSA4IDE0IDguNjcgMTQgOC41IDE0LjUgOSAxNS41IDkgNVMyLjUgMTUgMi41IDE1cy42NyAxLjUgMS41IDEuNXoiLz48L3N2Zz4=" alt="Logo">
+                    <h1>御音阁</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="recruitment.html">招新公告</a></li>
+                    <li><a href="events.html">活动日历</a></li>
+                    <li><a href="news1.html">最新动态</a></li>
+                    <li><a href="works1.html">作品展示</a></li>
+                    <li><a href="members.html">成员查询</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="recruitment.html#come">加入我们</a></li>
+					<li><a href="navigation.html">更多</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 页眉 -->
+    <section class="header-banner">
+        <div class="container">
+            <div class="header-content">
+                <h2 class="fade-in">社团考核</h2>
+                <p class="fade-in delay-1">欢迎有志于配音艺术的你加入我们的大家庭！</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 招新公告 -->
+    <section class="recruitment-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>【御音阁】基础考核本</h2>
+            </div>
+            
+            <div class="recruitment-content">
+                <div class="main-content">
+                    <!-- 音频播放器 -->
+                    <div class="audio-player-container">
+                        <div class="audio-player">
+                            <div class="audio-info">
+                                <p>音频播放器</p>
+                                <div class="progress-container">
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <div class="time-display">
+                                    <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="audio-controls">
+                                <button id="play-btn" class="play-btn">▶</button>
+                                <button id="pause-btn" class="pause-btn">⏸</button>
+                                <button id="stop-btn" class="stop-btn">⏹</button>
+                                <button id="rewind-btn" class="rewind-btn">⏪</button>
+                                <button id="forward-btn" class="forward-btn">⏩</button>
+                                
+                                <div class="volume-control">
+                                    <span>🔊</span>
+                                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.7">
+                                </div>
+                                
+                                <button id="playlist-toggle" class="playlist-toggle">📋</button>
+                            </div>
+                            
+                            <div id="playlist" class="playlist">
+                                <div class="playlist-item active" data-src="assets/audition/御音阁-考核本-考核用.mp3">御音阁-考核本-考核用 - BGM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-effect" data-text="御音阁·基础考核本" style="text-align: center; display: table-cell;">御音阁·基础考核本</h3><br>
+                   
+                    <p class="text-effect" data-text="长期纳新，不拒新！" style="text-align: center; display: table-cell;">长期纳新，不拒新！<br>
+					<br>小群体，无事生非，言语粗鲁，引战开瓜，请绕道而行！<br>
+                    <br>主要招收：编剧/创作，设计/美工，摄影/后期，歌手/主持，CV等，期待你的加入！<br></p>
+				<center>
+                <div class="warning">					
+                    <strong>待考核通过，方可申请加入社团，否则一概拒绝申请 !</strong>
+                </div>  
+				</center>
+                    <h3>考前须知：</h3><br>
+                    <p class="text-effect" data-text="考前须知">1. 本社团考核秉持公平、公正、公开的原则；<br>
+					<br>2. 考核人员请端正态度，互相尊重，认真对待以下考核。<br>
+                    <br>3. 考核人员须保证麦口清晰、避免环境音嘈杂。</p>
+
+				<center>
+                <div class="warning">					
+                    <strong>祝大家考核顺利，一路前行，御音阁欢迎你!</strong>
+                </div>  
+				</center>  
+                    
+                    <h3>第一部分：自我介绍</h3><br>
+				<div class="warning">					
+                    <strong>请考核人员进行简单自我介绍</strong>
+                </div>  
+                    <p>例：（称呼、年龄、经验、特长、上线时间等）</p><br>
+                    
+                    <h3>第二部分：普通话</h3><br>
+				<div class="warning">					
+                    <strong>考核要求：气息稳定、字音清晰准确</strong>
+                </div>  
+                    <p><strong>四声歌</strong></p><br>
+                    <p>xué hǎo shēng yùn biàn sì shēng ，yīn yáng shǎng qù yào fēn míng 。</p>
+                    <p>学好声韵辨四声，阴阳上去要分明。</p><br>
+                    <p>bù wèi fāng fǎ xū zhǎo zhǔn ，kāi qí hé cuō shǔ kǒu xíng 。</p>
+                    <p>部位方法须找准，开齐合撮属口型。</p><br>
+                    <p>shuāng chún bān bào bì bǎi bō ，dǐ shé dāng dì dòu diǎn dīng 。</p>
+                    <p>双唇班报必百波，抵舌当地斗点丁。</p><br>
+                    <p>shé gēn gāo gǒu kēng gēng gù ，shé miàn jī jié jiào jiān jīng 。</p>
+                    <p>舌根高狗坑耕故，舌面机结教尖精。</p><br>
+                    <p>qiào shé zhǔ zhēng zhēn zhì zhào ，píng shé zī zé zǎo zài zēng 。</p>
+                    <p>翘舌主争真志照，平舌资责早再增。</p><br>
+                    <p>cā yīn fā fān fēi fēn fù ，sòng qì chá chái chǎn chè chēng 。</p>
+                    <p>擦音发翻飞分副，送气茶柴产彻称。</p><br>
+                    <p>hé kǒu hū wǔ kū hú gǔ ，kāi kǒu hé pō gē ān zhēng 。</p>
+                    <p>合口呼舞枯湖古，开口河坡歌安争。</p><br>
+                    <p>cuō kǒu xū xué xún xú jù ，qí chǐ yī yōu yáo yè yīng 。</p>
+                    <p>撮口虚学寻徐剧，齐齿衣优摇夜英。</p><br>
+                    <p>qián bí ēn yīn yān wān wěn ，hòu bí áng yíng zhōng yōng shēng 。</p>
+                    <p>前鼻恩因烟弯稳，后鼻昂迎中拥生。</p><br>
+                    <p>yǎo jǐn zì tóu guī zì wěi ，yīn yáng shǎng qù jì biàn shēng 。</p>
+                    <p>咬紧字头归字尾，阴阳上去记变声。</p><br>
+                    <p>xún xù jiàn jìn jiān chí liàn ，bù nán dá dào chún hé qīng 。</p>
+                    <p>循序渐进坚持练，不难达到纯和清。</p><br>
+                    
+                    <h3>第三部分：气息</h3><br>
+				<div class="warning">					
+                    <strong>考核要求：选择一段，深吸一口气，不换气的读完，气息稳而绵长，坚持的越久越好</strong>
+                </div>   
+                    <p>（一）、数数练习</p><br>
+                    <p>1，2，3，4，5，6，.........30...40，45，50，55，60........100...</p><br>
+                    
+                    <p>（二）、数枣练习</p><br>
+                    <p>出东门，过大桥，大桥前面一树枣，拿着竿子去打枣，青的多，红的少。</p><br>
+                    <p>一个枣，两个枣，三个枣，四个枣，五个枣，六个枣，七个枣，八个枣，九个枣，十个枣，十个枣，九个枣，八个枣，七个枣，六个枣，五个枣，四个枣，三个枣，两个枣，一个枣。</p><br>
+                    <p>这是一个绕口令，一口气说完才算好。</p><br>
+                    
+                    <p>（三）、数葫芦</p><br>
+                    <p>南园里有一堆葫芦，结的滴沥嘟噜，甜葫芦，苦葫芦，红葫芦，鼓葫芦，好汉能说出二十四个葫芦:</p><br>
+                    <p>一个葫芦、两个葫芦、三个葫芦、四个葫芦....</p><br>
+                    
+                    <p>（四）、数旗</p><br>
+                    <p>广场上飘红旗，我来数数几面旗?</p><br>
+                    <p>一面旗，两面旗，三面旗，四面旗，五面旗，六面旗......一共看到N面旗</p><br>
+                    
+                    <p>（五）、气息运用</p><br>
+                    <p>害怕时的气息；寒冷时的气息；急促时的气息；疼痛时的气息；舒服时的气息。</p><br>
+                    
+                    <h3>第四部分：绕口令</h3><br>
+				<div class="warning">					
+                    <strong>考核要求：选择其中两段，完整流畅、字音准确</strong>
+                </div>                   
+                    <p>1.《捉兔》</p><br>
+                    <p>一位爷爷他姓顾，上街打醋又买布。买了布，打了醋，回头看见鹰抓兔。放下布，搁下醋，上前去追鹰和兔，飞了鹰，跑了兔。打翻醋，醋湿布。</p><br>
+                    
+                    <p>2.《小猪》</p><br>
+                    <p>小猪扛锄头，吭哧吭哧走。小鸟唱枝头，小猪扭头瞅，锄头撞石头，石头砸猪头。小猪怨锄头，锄头怨猪头。</p><br>
+                    
+                    <p>3《白石塔》</p><br>
+                    <p>白石白又滑，搬来白石搭白塔。白石塔，白石塔，白石搭石塔，白塔白石搭。搭好白石塔，白塔白又滑。</p><br>
+                    
+                    <p>4.《花鸭与彩霞》</p><br>
+                    <p>水中映着彩霞，水血游着花鸭。霞是五彩霞，鸭是麻花鸭。麻花鸭游进五彩霞，五彩露网仕麻花鸭。乐坏了鸭，拍碎了霞，分不清是鸭还是霞。</p><br>
+                    
+                    <p>5.《四和十》</p><br>
+                    <p>四和十，十和四，十四和四十，四十和十四。说好四和十得靠舌头和牙齿。谁说四十是“细席”，他的舌头没用力;谁说十四是“适时”，他的舌头没伸直。认真学，常炼习，十四、四十、四十四。</p><br>
+                    
+                    <p>6.《慈过河》</p><br>
+                    <p>哥哥弟弟坡前坐，坡上卧着一只鹅，坡下流着一条河，哥哥说：宽宽的河，弟弟说：白白的鹅。鹅要过河，河要渡鹅。不知是鹅过河，还是河渡鹅。</p><br>
+                    
+                    <p>7.《颠倒欲》</p><br>
+                    <p>咬牛奶，喝面包，夹着火车上皮包。东西街，南北走，出门看见人咬狗。拿起狗来打砖头，又怕砖头咬我手。</p><br>
+                    
+                    <p>8.《兜装豆》</p><br>
+                    <p>兜里装豆，豆装满兜，兜破漏豆。倒出豆，补破兜，补好兜，又装豆，装满兜，不漏豆。</p><br>
+                    
+                    <p>9.《狗与猴》</p><br>
+                    <p>树上卧只猴，树下蹲条狗。猴跳下来撞了狗，狗翻起来咬住猴，不知是猴咬狗，还是狗咬猴。</p><br>
+                    
+                    <p>10.《河里有只船》</p><br>
+                    <p>河里有只船，船上挂白帆，风吹帆张船向前，无风帆落停下船。</p><br>
+                    
+                    <p>11.《汤烫塔》</p><br>
+                    <p>老唐端蛋汤，踏凳登宝塔，只因凳太滑，汤洒汤烫塔。</p><br>
+                    
+                    <p>12.《蚕和蝉》</p><br>
+                    <p>这是蚕，那是蝉，蚕常在叶里藏，蝉常在林里唱。</p><br>
+                    
+                    <p>13.《六十六头牛》</p><br>
+                    <p>六十六岁的陆老头，盖了六十六间楼，买了六十六篑油，养了六十六头牛，栽了六十六梯重杨柳。六十六篓油，堆在六十六间楼;六十六头牛，扣在六十六棵垂杨柳。忽然一阵狂风起,吹倒了六十六间楼，翻倒了六十六篓油，折断了六十六梯重杨柳，砸死了六十六头牛，急煞了六十六岁的陆老头。</p><br>
+                    
+                    <p>14.《任命、人名》</p><br>
+                    <p>任命是任命，人名是人名，任命人名不能错，错了人名错任命。</p><br>
+                    
+                    <p>15.《枪和糠》</p><br>
+                    <p>墙上一个面，窗上一支枪，窗下一箩糠。枪落进了糠，糠埋住了枪，窗要糠让枪，糠要枪上墙，墙要枪上面。互相不退让，镜赶不走枪，枪也上不了窗和墙。</p><br>
+                    
+                    <p>16.《白果树》</p><br>
+                    <p>我从伯伯门前过，看见伯爹伯妈门前种着白果树，白果树上站着百十百个白斑鸠，我就拣了百十百块白石头，打那百十百个白斑鸠。</p><br>
+                    
+                    <p>17.《好孩子》</p><br>
+                    <p>张家有个小英子，王家有个小柱子。张家的小英子，自己穿衣洗袜子，天天扫地擦桌子，王家的小柱子，捡到一只皮夹子，还给后院大婶子。小英子，小柱子，他们部是好孩子。</p><br>
+                    
+                    <p>18.《送花》</p><br>
+                    <p>华华有两朵红花，红红有两朵黄花，华华想要黄花，红红想要红花，华华送给红红一朵红花，红红送给华华一朵黄花。</p><br>
+                    
+                    <h3>第五部分：诵读</h3><br>
+				<div class="warning">					
+                    <strong>考核要求：选择其中两段，完整流畅、注意停顿和重音、咬字清晰、情绪准确</strong>
+                </div> 
+                    
+                    <p>（一）、旁白</p><br>
+                    <p>中国人说：靠山吃山、靠海吃海。这不仅是一种因地制宜的变通，更是顺应自然的中国式生存之道。从古到今，这个农耕民族精心使用着脚下的每一寸土地，获取食物的活动和非凡智慧，无处不在。</p><br>
+                    <p style="text-align: right;">——《舌尖上的中国》</p><br>
+                    
+                    <p>午门，一直是紫禁城最重要的入口，从帝王将相到寻常百姓，它见证了这座古老宫殿的全部历史和几乎所有的过客。今日，与午门一同静候各地游客的，是这间展厅内的453件展品，它们能瞬间带着人们穿梭时光，回到1420年，亲历600年前紫禁城建成的时刻。</p><br>
+                    <p style="text-align: right;">——《我在故宫六百年》</p><br>
+                    
+                    <p>（二）、诗歌散文</p><br>
+                    <p>夕阳西下，晚霞轻柔地洒在可可西里的土地上，宁静而贫瘠的土地仿佛又多了几分生气。我呆呆地伫立在寒风中，影子拉得很远很远.……我的脚下就是我刚刚死去的丈夫和女儿，他们已经被蹂躏得面目全非，四周满是我部族的尸体，他们的皮全部被扒光。空气中弥漫着血腥气，地上血流成河。在夕阳的照耀下，显得愈加惨烈。我，这场大屠杀中唯一的幸存者，便成了可可西里最后的一只藏羚羊。</p><br>
+                    <p style="text-align: right;">——《最后一只藏羚羊（节选一）》</p><br>
+                    
+                    <p>我曾经无比自豪于自己是一只藏羚羊，我们生活在遥远的可可西里，那里气候恶劣，土地贫瘠，可我们却有着惊人的耐力。什么水草丰茂之地，对我们没有任何吸引力，我们常常悠然地卧在雪中，或是在猛烈的冰雹下嬉戏。那时的可可西里之于我们，无异于世外桃源，那梦一般的世界曾经是多么的美丽。然而，一声枪响穿透了可可西里的黎明，我的梦被击的粉碎。当一辆辆吉普在高原上奔驰的时候，我的无数同伴也好奇地紧随其后要和他比个高低，追逐嘛，这是我们常玩的游戏……然而这一次我们却只猜对了开头，却猜不着这结局，一只只黑洞洞的枪口正悄悄举起……从那一刻起我的种族的大杀戮便开始了，静谧的可可西里被枪声毁掉了。</p><br>
+                    <p style="text-align: right;">——《最后一只藏羚羊（节选二）》</p><br>
+                    
+                    <p>从明天起，做一个幸福的人</p><br>
+                    <p>喂马，劈柴，周游世界</p><br>
+                    <p>从明天起，关心粮食和蔬菜</p><br>
+                    <p>我有一所房子，面朝大海，春暖花开</p><br>
+                    
+                    <p style="text-align: right;">——《面朝大海，春暖花开（节选）》海子</p><br>
+                    
+                    <p>我是你河边上破旧的老水车</p><br>
+                    <p>数百年来纺着疲惫的歌</p><br>
+                    <p>我是你额上熏黑的矿灯</p><br>
+                    <p>照你在历史的隧洞里蜗行摸索</p><br>
+                    <p>我是干瘪的稻穗，是失修的路基</p><br>
+                    <p>是淤滩上的驳船</p><br>
+                    <p>把纤绳深深</p><br>
+                    <p>勒进你的肩膊</p><br>
+                    
+                    <p style="text-align: right;">——《祖国啊，我亲爱的祖国（节选）》舒婷</p><br>
+					
+                    <p>（三）、古诗</p><br>
+                    <p>春花秋月何时了？往事知多少。小楼昨夜又东风，故国不堪回首月明中。</p><br>
+                    <p>雕栏玉砌应犹在，只是朱颜改。问君能有几多愁？恰似一江春水向东流。</p><br>
+                    
+                    <p style="text-align: right;">——《虞美人·春花秋月何时了》李煜</p><br>
+                    
+                    <p>十年生死两茫茫，不思量，自难忘。千里孤坟，无处话凄凉。</p><br>
+                    <p>纵使相逢应不识，尘满面，鬓如霜。</p><br>
+                    <p>夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。</p><br>
+                    <p>料得年年肠断处，明月夜，短松冈。</p><br>
+                    
+                    <p style="text-align: right;">——《江城子·乙卯正月二十日夜记梦》苏轼</p><br>
+                    
+                    <h3>第六部分：戏感</h3><br>
+				<div class="warning">					
+                    <strong>考核要求：选择三段，情绪准确到位</strong>
+                </div>
+                    
+                    <p>悲痛：为什么...我们说好的一起仗剑天涯，劫富济贫，可最后你却变成了朝廷的鹰爪...</p><br>
+                    
+                    <p>温柔：在外可要照顾好自己，想我的时候就给我书信，有什么好玩的趣事可也一定要告诉我..</p><br>
+                    
+                    <p>气愤：怎么？这才三年不见，你都做了什么！还要我怎么去包容你，我受够了！</p><br>
+                    
+                    <p>冷漠：这句话我已经说了很多遍，可你却依旧如此，我们之间已经没有什么好谈的了。</p><br>
+                    
+                    <p>诱惑：这是去哪呢？如此良辰美景，不如我们玩一点好玩的游戏，然后我再告诉你..</p><br>
+                    
+                    <p>阴狠：我当然知道啊，但是你以为这就结束了？我告诉你们，就算事情暴露了我也要拉着你们陪葬...准备好好享受吧..</p><br>
+                    
+                    <p>生气：你能不能好好说话，每次一点点事情你就夹枪带棒的，还觉得自己挺有理的！麻烦你稍微用点脑子好吧！</p><br>
+                    
+                    <p>爆发：你为什么要这样对小宝！他才几岁啊！他知道什么！有什么事你冲我来啊！我再也不会原谅你了！</p><br>
+                    
+                    <p>哭泣：明明约好的在桃花树下把酒言欢，可你为何还躺在那里，你起来...起来啊...对不起..</p><br>
+                    
+                    <p>开心：现在是2025年5月20日，今天呢，终于可以和宝宝一起出去吃大餐了！这次我一定要多吃一点！</p><br>
+                    
+                    <p>悲伤：我一直记得我们儿时的约定，没想到，最后连你也要弃我而去...</p><br>
+                    
+                    <p>阴险：没想到，我谋划了这么多年，今日终于等到了，又岂能错失如此良机。</p><br>
+                    
+                    <p>惊恐：什么动静！！是....是你！！！你居然没死！！！当年害死你的不是我！是他们！！你听我解释！！！</p><br>
+                    
+                    <p>醉态：我...我没醉..你才醉了..说好的明天陪我一起去山上，可不能抵赖..不然..</p><br>
+                    
+                    <p>濒死：对..不起..我说过..要陪你一起去华山之巅..陪你到天涯海角...可是我..好..困...我..爱你..</p><br>
+                    
+                    <p>霸道：记住你的身份，小鬼，在这里，可是要听我的。</p><br>
+                    
+                    <p>可爱：哥哥，明天你们要去海边玩，可不可以带上我...我可是..敲级敲级厉害的。</p><br>
+                    
+                    <p>瘢狂：他死了？！他终于死了！我...我自由了，你们又是谁？是不是跟他一伙的，去死吧！</p><br>
+                    
+                    <p>变态：你说你喜欢桃花，我就为你种下桃花。可你却喜欢他，那我就帮你把他埋在树下吧。来年的桃花一定会开的特别的漂亮。</p><br>
+                    
+                    <h3>第七部分：伪音</h3><br>
+				<div class="warning">					
+                    <strong>考核要求：随意发挥，加分项</strong>
+                </div>					
+                    
+                    <p>（一）、女性音色</p><br>
+                    <p>萝莉音：哇，好香啊，姐姐，姐姐，我想吃这个，这个，还有这个...姐姐...</p><br>
+                    
+                    <p>少女音：哎，跑那么快干嘛，你等等我呀，我都跟不上了。</p><br>
+                    
+                    <p>少御音：还真是有趣，看来他已有所察觉，计划要加快了。</p><br>
+                    
+                    <p>御姐音：都多少年了，竟有如此有趣的事，诸位可愿随我一起。</p><br>
+                    
+                    <p>女王音：本宫向来如此，尔等若还有惑，便去向先生请教吧。</p><br>
+                    
+                    <p>大妈音：哎哟，今天怎么有空出来买菜啊，要不，中午来我家吃饭吧，我一个人也吃不了多少。</p><br>
+                    
+                    <p>奶奶音：这调令乃是你父皇旨意，此去江南切莫贪玩，办完事情早日回来，还有一门亲事等你呢。</p><br>
+                    
+                    <p>女妖音:（妩媚）这次几日不见，你就忘了，可真让奴家伤心呢。</p><br>
+                    
+                    <p>老鸨音：哎哟，我的王公子啊，您可算是来了，我们花花可是等了您一宿呢。</p><br>
+                    
+                    <p>正太音：我也是有名字的，等我长大了一定要名扬天下。</p><br>
+                    
+                    <p>（二）、男性音色</p><br>
+                    
+                    <p>少年音：你们居然敢在背后说我妹妹坏话，看我不撕烂你们的嘴。</p><br>
+                    
+                    <p>公子音：不过是沧海一粟，诸位可莫要再取笑我了。</p><br>
+                    
+                    <p>大叔音：小子，我看你天赋不错，不如随我一起仗剑江湖，哎哎哎，跟你开玩笑呢。</p><br>
+                    
+                    <p>爷爷音：今日北边气象异常，又是一个多事之秋啊，我倒希望是我看错了。</p><br>
+                    
+                    <p>书生音：你们莫要再逼我了，那舞刀弄剑有什么好的，岂可如此肤浅。</p><br>
+                    
+                    <p>帝王音：诸位爱卿，对北方战事，有何见解，朕已许久不见此番景象了。</p><br>
+                    
+                    <p>太监音：主子说的当然是对的，奴才当然是主子的。</p><br>
+                    
+                    <p>男妖音：这风啊，可真轻柔，这般轻柔的感觉，还真让人怀念啊。</p><br>
+                    
+                    <p>霸总音：怎么，现在想起来是不是有点晚了，今晚，就好好躺着吧。</p><br>
+					
+				<center>
+                <div class="warning">					
+                    <strong>感谢您参与本次的考核，御音阁欢迎您的加入!</strong>
+                </div>  
+				</center>  
+
+				<center>
+                <div class="warning">					
+                    <strong>本剧所采用的音乐、音效等素材来源于互联网，如侵权请联系作者删除。<br>著作权归原作者所有，本剧仅供配音爱好者学习、交流。</strong>
+                </div>  
+				</center>  
+				
+                </div>
+
+                <div class="sidebar">
+                    <h3>考核信息</h3>
+                    <div class="script-info">
+                        <div class="script-info-item">
+                            <i>🆔</i>
+                            <span>#003</span>
+                        </div>
+                        <div class="script-info-item">
+                            <i>📅</i>
+                            <span>发布日期: 2024-01-19</span>
+                        </div>
+                        <div class="script-info-item">
+                            <i>👤</i>
+                            <span>考核主办方: 御音阁</span>
+                        </div>
+                        <div class="script-info-item">
+                            <i>📚</i>
+                            <span>考核时长: 约10分钟</span>
+                        </div>
+                        <div class="script-info-item">
+                            <i>🎭</i>
+                            <span>考核形式: 线上</span>
+                        </div>
+                        <div class="script-info-item">
+                            <i>👥</i>
+                            <span>参与人数: 1人</span>
+                        </div>
+                    </div>
+
+                    <h3>剧本标签</h3>
+                    <div class="category-tags">
+                        <div class="interactive-tag">自我介绍</div>
+                        <div class="interactive-tag">普通话</div>
+                        <div class="interactive-tag">气息</div>
+                        <div class="interactive-tag">绕口令</div>
+                        <div class="interactive-tag">诵读</div>
+                        <div class="interactive-tag">戏感</div>
+                        <div class="interactive-tag">伪音</div>
+                    </div>
+
+                    <h3>考核准备</h3>
+                    <div class="tags-container">
+                        <span class="tag">安静环境</span>
+                        <span class="tag">清晰设备</span>
+                        <span class="tag">稳定网络</span>
+                        <span class="tag">充足电量</span>
+                        <span class="tag">提前练习</span>
+                        <span class="tag">放松心态</span>
+                    </div>
+
+                    <div class="more-works">
+                        <h3>更多作品</h3>
+                        <a href="works1.html" class="more-works-btn">查看全部作品</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>御音阁</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="recruitment.html">招新公告</a></li>
+                        <li><a href="events.html">活动日历</a></li>
+                        <li><a href="news1.html">最新动态</a></li>
+                        <li><a href="works1.html">作品展示</a></li>
+                        <li><a href="members.html">成员查询</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="recruitment.html#come">加入我们</a></li>
+                        <li><a href="navigation.html">皇宸 · 潇府 · 御音阁</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>皇宸</h3>
+                    <ul>
+                            <li><a href="https://hc.ihcking.com">皇宸总部</a></li>
+                            <li><a href="https://hcbl.ihcking.com">皇宸部落</a></li>
+                            <li><a href="https://qlgh.ihcking.com">乾龙公会</a></li>
+                            <li><a href="https://qcjz.ihcking.com">卿城家族</a></li>
+                            <li><a href="https://fgsm.ihcking.com">枫谷师门</a></li>
+                            <li><a href="https://xf.ihcking.com">潇府</a></li>
+                            <li><a href="https://yg.ihcking.com">逸阁</a></li>
+                            <li><a href="https://qg.ihcking.com">卿阁</a></li>
+                            <li><a href="https://fg.ihcking.com">枫阁</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>友链</h3>
+                    <ul>
+                            <li><a href="https://xf.ihcking.com">潇府</a></li>
+                            <li><a href="https://yg.ihcking.com">逸阁</a></li>
+                            <li><a href="https://qg.ihcking.com">卿阁</a></li>
+                            <li><a href="https://fg.ihcking.com">枫阁</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <ul>
+                            <li><a href="#">💬 3010662388</a></li>
+                            <li><a href="#">📧 hc@ihcking.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <div class="wechat-qrcode">
+                        <div class="wechat-qrcode-item">
+                            <img src=".\assets\img\xfdyh.jpg" alt="微信公众号1">
+                            <p>潇府订阅号</p>
+                        </div>
+                        <div class="wechat-qrcode-item">
+                            <img src=".\assets\img\hcwfh.jpg" alt="微信公众号2">
+                            <p>皇宸服务号</p>
+                        </div>
+                    </div>
+                    <div class="social-platforms">
+                        <a href="#" title="哔哩哔哩">
+                            <i>B</i>
+                        </a>
+                        <a href="#" title="微博">
+                            <i>微</i>
+                        </a>
+                        <a href="#" title="抖音">
+                            <i>抖</i>
+                        </a>
+                        <a href="#" title="网易云音乐">
+                            <i>云</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 御音阁 . 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 音频播放器功能
+            const audio = new Audio('assets/audition/御音阁-考核本-考核用.mp3'); // 替换为实际的音频文件URL
+            const playBtn = document.getElementById('play-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            const rewindBtn = document.getElementById('rewind-btn');
+            const forwardBtn = document.getElementById('forward-btn');
+            const progressBar = document.querySelector('.progress-bar');
+            const currentTimeDisplay = document.getElementById('current-time');
+            const totalTimeDisplay = document.getElementById('total-time');
+            const progressContainer = document.querySelector('.progress-container');
+            const volumeSlider = document.getElementById('volume-slider');
+            const playlistToggle = document.getElementById('playlist-toggle');
+            const playlist = document.getElementById('playlist');
+            const playlistItems = document.querySelectorAll('.playlist-item');
+            
+            let isPlaying = false;
+            audio.volume = 0.7; // 默认音量
+
+            // 格式化时间显示
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            // 更新进度条
+            function updateProgressBar() {
+                const percentage = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${percentage}%`;
+                currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            }
+
+            // 播放按钮
+            playBtn.addEventListener('click', function() {
+                if (!isPlaying) {
+                    audio.play();
+                    isPlaying = true;
+                    playBtn.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        playBtn.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+
+            // 暂停按钮
+            pauseBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    isPlaying = false;
+                    pauseBtn.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        pauseBtn.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+
+            // 停止按钮
+            stopBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    isPlaying = false;
+                    progressBar.style.width = '0%';
+                    currentTimeDisplay.textContent = '0:00';
+                    stopBtn.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        stopBtn.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+
+            // 倒退3秒
+            rewindBtn.addEventListener('click', function() {
+                audio.currentTime = Math.max(0, audio.currentTime - 3);
+                rewindBtn.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    rewindBtn.style.transform = 'scale(1)';
+                }, 300);
+            });
+
+            // 快进3秒
+            forwardBtn.addEventListener('click', function() {
+                audio.currentTime = Math.min(audio.duration, audio.currentTime + 3);
+                forwardBtn.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    forwardBtn.style.transform = 'scale(1)';
+                }, 300);
+            });
+
+            // 音频加载完成时更新总时长
+            audio.addEventListener('loadedmetadata', function() {
+                totalTimeDisplay.textContent = formatTime(audio.duration);
+            });
+
+            // 音频播放时更新进度条
+            audio.addEventListener('timeupdate', updateProgressBar);
+
+            // 点击进度条跳转到指定时间
+            progressContainer.addEventListener('click', function(e) {
+                const rect = progressContainer.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                audio.currentTime = pos * audio.duration;
+            });
+
+            // 音频播放结束时重置
+            audio.addEventListener('ended', function() {
+                progressBar.style.width = '0%';
+                currentTimeDisplay.textContent = '0:00';
+                isPlaying = false;
+            });
+
+            // 音量控制
+            volumeSlider.addEventListener('input', function() {
+                audio.volume = this.value;
+            });
+
+            // 播放队列切换
+            playlistToggle.addEventListener('click', function() {
+                playlist.classList.toggle('open');
+                playlistToggle.style.transform = playlist.classList.contains('open') ? 'scale(1.2)' : 'scale(1)';
+                setTimeout(() => {
+                    playlistToggle.style.transform = 'scale(1)';
+                }, 300);
+            });
+
+            // 播放队列功能
+            playlistItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const audioSrc = this.getAttribute('data-src');
+                    audio.src = audioSrc;
+                    audio.load();
+                    audio.play();
+                    isPlaying = true;
+                    
+                    // 更新活跃项
+                    playlistItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 关闭播放列表
+                    playlist.classList.remove('open');
+                });
+            });
+
+            // 视频播放器功能
+            const videoElement = document.getElementById('video-element');
+            const videoPlayerContainer = document.querySelector('.video-player-container');
+            const videoCover = document.querySelector('.video-cover');
+
+            // 视频封面点击播放
+            videoCover.addEventListener('click', function() {
+                videoElement.play();
+                videoCover.style.display = 'none';
+            });
+
+            // 自动识别文件类型
+            function identifyFileType(url) {
+                const extension = url.split('.').pop().toLowerCase();
+                const audioExtensions = ['mp3', 'wav', 'ogg'];
+                const videoExtensions = ['mp4', 'avi', 'mov', 'webm'];
+
+                if (audioExtensions.includes(extension)) {
+                    return 'audio';
+                } else if (videoExtensions.includes(extension)) {
+                    return 'video';
+                } else {
+                    return 'unknown';
+                }
+            }
+
+            // 示例文件URL
+            const fileUrl = 'https://www.w3schools.com/html/mov_bbb.mp4'; // 替换为实际的文件URL
+
+            // 检查文件类型并初始化播放器
+            function initializePlayer() {
+                const fileType = identifyFileType(fileUrl);
+                
+                if (fileType === 'video') {
+                    videoElement.src = fileUrl;
+                    videoCover.style.display = 'flex';
+                } else if (fileType === 'audio') {
+                    audio.src = fileUrl;
+                    videoPlayerContainer.style.display = 'none';
+                } else {
+                    videoPlayerContainer.style.display = 'none';
+                }
+            }
+
+            // 初始化播放器
+            initializePlayer();
+
+            // 下载按钮功能
+            const downloadBtn = document.querySelector('.download-btn');
+            downloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+
+            // 滚动动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(26, 26, 46, 0.95)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.2)';
+                } else {
+                    header.style.backgroundColor = 'rgba(26, 26, 46, 0.9)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                }
+            });
+            
+            // 交互式标签
+            const interactiveTags = document.querySelectorAll('.interactive-tag');
+            interactiveTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    alert(`您选择了: ${this.textContent}`);
+                });
+            });
+            
+            // 更多作品按钮
+            const moreWorksBtn = document.querySelector('.more-works-btn');
+            moreWorksBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('跳转到更多考核页面');
+            });
+            
+            // 文字特效动画
+            const textEffects = document.querySelectorAll('.text-effect');
+            textEffects.forEach(effect => {
+                effect.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.transition = 'all 0.3s ease';
+                });
+                
+                effect.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
