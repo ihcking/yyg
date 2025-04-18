@@ -130,7 +130,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1305&q=80') center/cover;
+            background: url('https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
             opacity: 0.2;
             z-index: 0;
         }
@@ -417,6 +417,57 @@
             font-weight: bold;
         }
 
+        /* 视频播放器 */
+        .video-player-container {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .video-player {
+            width: 100%;
+            background: #000;
+        }
+
+        .video-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .play-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-icon::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
+        }
+
         /* 文字特效 */
         .text-effect {
             position: relative;
@@ -505,12 +556,12 @@
 
         .wechat-qrcode-item {
             text-align: center;
-            width: 120px;
+            width: 120px; /* 设置容器为正方形 */
         }
 
         .wechat-qrcode-item img {
-            width: 120px;
-            height: 120px;
+            width: 120px; /* 设置二维码为正方形 */
+            height: 120px; /* 设置二维码为正方形 */
             background: white;
             padding: 5px;
             border-radius: 5px;
@@ -683,15 +734,15 @@
                     <h1>御音阁</h1>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="../index.htmlindex.html">首页</a></li>
-                    <li><a href="../index.htmlrecruitment.html">招新公告</a></li>
-                    <li><a href="../index.htmlevents.html">活动日历</a></li>
-                    <li><a href="../index.htmlnews1.html">最新动态</a></li>
-                    <li><a href="../assets/works1.html">作品展示</a></li>
-                    <li><a href="../index.htmlmembers.html">成员查询</a></li>
-                    <li><a href="../index.htmlabout.html">关于我们</a></li>
-                    <li><a href="../index.htmlrecruitment.html#come">加入我们</a></li>
-					<li><a href="../index.htmlnavigation.html">更多</a></li>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="recruitment.html">招新公告</a></li>
+                    <li><a href="events.html">活动日历</a></li>
+                    <li><a href="news1.html">最新动态</a></li>
+                    <li><a href="works1.html">作品展示</a></li>
+                    <li><a href="members.html">成员查询</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="recruitment.html#come">加入我们</a></li>
+					<li><a href="navigation.html">更多</a></li>
                 </ul>
             </nav>
         </div>
@@ -765,9 +816,6 @@
                         </div>
                     </div>
 
-                    <p class="text-effect" data-text="欢迎萌新Pia戏走本练习！">欢迎萌新Pia戏走本练习！</p>
-                    <p>仅用于学习！未经授权，谢绝任何形式的抄袭、搬运、洗稿、商用！</p>
-
                     <p class="text-effect" data-text="PIA戏说明">“PIA”原为拟声词，模拟快速翻动剧本纸张的声音，现引申为"快速进入表演状态"的互动形式。</p>
 
                     <p>在房间pia戏模式中进行，走本时需要保持环境安静，麦克风清晰，普通话标准，有情感起伏，演绎当前剧本中所扮演的角色。</p>
@@ -785,30 +833,29 @@
 
                     <p>双普（1男1女）：需要由男角色来演绎周远，女角色来演绎林小满。</p>
 
-                    <p>角色： </p>
-                    <p>周远（男）：腼腆内向，有爱心，会画画。</p>
+                    <p>角色：周远（男）：腼腆内向，有爱心，会画画。</p>
                     <p>林小满（女）：活泼开朗，喜欢周远，会作图。</p>
 
                     <p>欢迎收听由[御音阁]出品的《Pia戏萌新本-普本》，请大家尽情演绎哦</p>
 
-                    <p class="text-effect" data-text="[音效：下课铃声]">[音效：下课铃声]</p>
+                    <p class="text-effect" data-text="剧本开始">[音效：下课铃声]</p>
                     <p>林小满（活泼）："同学！你拿错作业本啦！"</p>
-                    <p class="text-effect" data-text="[音效：纸张抖动声]">[音效：纸张抖动声]</p>
+                    <p class="text-effect" data-text="纸张抖动">[音效：纸张抖动声]</p>
                     <p>林小满（疑问）："这明明是我的...咦？你怎么画了这么多小猫咪？"</p>
-                    <p class="text-effect" data-text="[音效：铅笔滚落声]">[音效：铅笔滚落声]</p>
+                    <p class="text-effect" data-text="铅笔滚落">[音效：铅笔滚落声]</p>
                     <p>周远（慌张）："...还给我！"</p>
-                    <p class="text-effect" data-text="[音效：快速翻页声]">[音效：快速翻页声]</p>
+                    <p class="text-effect" data-text="快速翻页">[音效：快速翻页声]</p>
                     <p>周远（强行解释）："这是、这是美术课的速写练习！"</p>
                     <p>林小满（憋笑）："可是第12页画的是...穿草莓围裙的女生喂流浪猫？"</p>
-                    <p class="text-effect" data-text="[音效：椅子拖动声]">[音效：椅子拖动声]</p>
+                    <p class="text-effect" data-text="椅子拖动">[音效：椅子拖动声]</p>
                     <p>周远（结巴）："那那那是构图练习！你你你看错了！"</p>
-                    <p class="text-effect" data-text="[音效：纸张撕裂声]">[音效：纸张撕裂声]</p>
+                    <p class="text-effect" data-text="纸张撕裂">[音效：纸张撕裂声]</p>
                     <p>周远（着急）："糟糕！"</p>
-                    <p class="text-effect" data-text="[音效：翻包找东西声]">[音效：翻包找东西声]</p>
+                    <p class="text-effect" data-text="翻包找东西">[音效：翻包找东西声]</p>
                     <p>林小满（温柔）："用碘伏要先这样——"</p>
-                    <p class="text-effect" data-text="[音效：创可贴撕开声]">[音效：创可贴撕开声]</p>
+                    <p class="text-effect" data-text="创可贴撕开">[音效：创可贴撕开声]</p>
                     <p>周远（小声）："...你怎么知道我在喂后巷那只瘸腿小白？"</p>
-                    <p class="text-effect" data-text="[音效：手机震动声]">[音效：手机震动声]</p>
+                    <p class="text-effect" data-text="手机震动">[音效：手机震动声]</p>
                     <p>林小满（得意笑）："因为——我在贴社团招新海报的时候看到的呀！要来当我的搭档吗？"</p>
 
                     <p>跟着我 左手 右手</p>
@@ -821,31 +868,6 @@
                     <p>装乖 耍帅 换不停风格</p>
                     <p>青春有太多 未知的猜测</p>
                     <p>成长的烦恼算什么</p>
-
-                    <h3 class="text-effect" data-text="（二）剧情歌">（二）剧情歌</h3>
-                    <p>一般为轮流演绎，根据当前剧本，在字体颜色更换后或者相应音效之后，或者剧本中的提示更换，根据麦序轮流演绎。部分台词可能较长，需要注意卡音效（等B不等人），台词没读完而下一个音效已经到了就需要接音效之后的台词。</p>
-
-                    <p>多人（N男N女）：没有特定的角色性别区分，注意剧本中提示换人，轮流演绎，走本麦序位不足时由下一位走本麦序位轮流开始。</p>
-
-                    <p>欢迎收听由[御音阁]出品的《Pia戏萌新本-剧情歌》，请大家尽情演绎哦</p>
-
-                    <p class="text-effect" data-text="序幕：结缘">序幕：结缘</p>
-                    <p class="text-effect" data-text="[音效：铜铃轻响]">[音效：铜铃轻响]</p>
-                    <p>玄霜（冷肃）："红尘阁第七代结师——玄霜，今日为君解心结。"</p>
-                    <p class="text-effect" data-text="[音效：冰晶凝结声]">[音效：冰晶凝结声]</p>
-                    <p>墨离（吊儿郎当）："小娘子，我的心结可深得很～（突然正经）比如...如何让死人复生？"</p>
-                    <p>青鸾（急迫）："小心！此人身上有妖气！"</p>
-                    <p class="text-effect" data-text="[音效：挡剑打斗声]">[音效：挡剑打斗声]</p>
-
-                    <h3 class="text-effect" data-text="第一幕：师徒执念">第一幕：师徒执念</h3>
-                    <p class="text-effect" data-text="[音效：风雪呼啸]">[音效：风雪呼啸]</p>
-                    <p>玄霜（颤抖）："这冰棺中的人...为何与师尊容貌相同？！"</p>
-                    <p>心结幻影·师尊（温柔）："霜儿，杀了我...杀了我你才能成为真正的结师。"</p>
-                    <p class="text-effect" data-text="[音效：剑刃递送声]">[音效：剑刃递送声]</p>
-                    <p>墨离（拦住）："等等！他的执念不是求生...是求你活着！"</p>
-                    <p class="text-effect" data-text="[音效：妖纹显现声]">[音效：妖纹显现声]</p>
-                    <p>青鸾（吐血）："他的记忆被篡改过..."</p>
-                    <p class="text-effect" data-text="[音效：冰棱碎裂声]">[音效：冰棱碎裂声]</p>
 
                     <!-- 更多内容省略，实际应用中可以继续添加 -->
                 </div>
