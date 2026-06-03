@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>御音阁 - 声动山河，音绘万象！</title>
     <meta name="description" content="御音阁社团专注于戏配音与有声创作，汇聚众多戏配音爱好者，致力于传承戏配音文化，为听众带来高质量的戏配音作品。">
     <meta name="keywords" content="御音阁, 社团，戏鲸, 配音秀, 配音社团, 戏配音, 有声读物, 有声创作, 有声表演, 配音作品">
@@ -202,6 +202,8 @@
             background: var(--gradient-bg);
             border-radius: 2px;
         }
+        
+        /* ========== 关键修复：英雄区 banner 圆角阴影增强 ========== */
         .hero {
             height: 100vh;
             background: var(--gradient-bg);
@@ -211,6 +213,9 @@
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
             margin-bottom: 60px;
+            /* 增加圆角阴影，完美匹配底部圆角弧度，解决“圆角阴影缺失”问题 */
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.35), 0 12px 25px -10px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
         }
         .hero::before {
             content: '';
@@ -222,6 +227,7 @@
             background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
             opacity: 0.2;
             z-index: 0;
+            border-radius: inherit; /* 让伪元素继承父级圆角，确保背景图也圆润 */
         }
         .hero::after {
             content: '';
@@ -232,6 +238,7 @@
             height: 100%;
             background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
             z-index: 1;
+            border-radius: inherit;
         }
         .hero-content {
             position: relative;
@@ -838,6 +845,7 @@
             .section-title h2 { font-size: 28px; }
             .works-grid, .news-grid, .team-gallery, .members-grid { grid-template-columns: 1fr; }
             .pagination-info { margin-left: 0; margin-top: 10px; width: 100%; text-align: center; }
+            .hero { box-shadow: 0 18px 30px -10px rgba(0, 0, 0, 0.3); } /* 移动端阴影微调 */
         }
     </style>
 </head>
