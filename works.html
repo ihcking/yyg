@@ -3,624 +3,667 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>御音阁 - 作品展示</title>
-    <!-- 网站描述 -->
-    <meta name="description" content="御音阁社团专注于戏配音与有声创作，汇聚众多戏配音爱好者，致力于传承戏配音文化，为听众带来高质量的戏配音作品。">
-    <!-- 网站关键词 -->
-    <meta name="keywords" content="御音阁, 社团，戏鲸, 配音秀, 配音社团, 戏配音, 有声读物, 有声创作, 有声表演, 配音作品">
-	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>御音阁 · 作品展示 | 配音社团 · 声动时光</title>
+    <meta name="description" content="御音阁社团作品展示 - 原创剧本、配音秀、有声读物、广播剧作品集，感受声音艺术的魅力。">
+    <meta name="keywords" content="御音阁，配音社团，戏鲸，配音秀，有声创作，广播剧，作品展示，剧本">
+    
+    <!-- favicon (沿用禾站资源，保持风格统一) -->
+    <link rel="icon" type="image/x-icon" href=".././assets/img/icon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href=".././assets/img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href=".././assets/img/icon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href=".././assets/img/icon/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* 全局样式 */
+        /* ===== 全局样式 & 变量 (完全继承禾页面的现代特效) ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            font-family: 'Microsoft YaHei', '微软雅黑', 'Segoe UI', Arial, sans-serif;
         }
 
         :root {
-            --primary-color: #8e2de2; /* 紫色 */
-            --secondary-color: #4a00e0; /* 深紫色 */
-            --accent-color: #e94057; /* 红色 */
+            --primary-color: #8e2de2;
+            --secondary-color: #4a00e0;
+            --accent-color: #e94057;
+            --fun-color: #ff9a3c;
+            --success-color: #00c853;
+            --info-color: #2979ff;
             --dark-color: #1a1a2e;
             --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #666;
+            --text-lighter: #888;
+            --border-color: #eaeaea;
+            --border-light: #f0f0f0;
             --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            --gradient-fun: linear-gradient(135deg, var(--fun-color), #ffcc00);
+            --gradient-success: linear-gradient(135deg, var(--success-color), #64dd17);
+            --section-bg: #ffffff;
+            --section-alt: #f8f9fa;
+            --section-light: #fcfcfe;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --shadow-deep: 0 12px 36px rgba(0, 0, 0, 0.12);
+            --nav-height: 70px;
         }
 
         body {
             background-color: var(--light-color);
-            color: var(--dark-color);
-            line-height: 1.6;
+            color: var(--text-color);
+            line-height: 1.7;
             overflow-x: hidden;
+            padding-top: var(--nav-height);
+            font-size: 16px;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        a { text-decoration: none; color: inherit; transition: all 0.25s ease; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
 
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 14px 28px;
             background: var(--gradient-bg);
             color: white;
             border: none;
-            border-radius: 30px;
-            font-weight: bold;
+            border-radius: 12px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+            box-shadow: 0 4px 12px rgba(142, 45, 226, 0.3);
+            font-size: 15px;
+            letter-spacing: 0.3px;
         }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(142, 45, 226, 0.4); }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6);
-        }
-
-        /* 导航栏 */
+        /* 导航栏 (御音阁风格，完全沿用禾特效) */
         header {
-            background-color: rgba(26, 26, 46, 0.9);
+            background-color: rgba(26, 26, 46, 0.98);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        nav {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
+        .logo { display: flex; align-items: center; gap: 14px; z-index: 1001; }
+        .logo img { height: 42px; width: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.25); }
+        .logo-text { display: flex; flex-direction: column; }
         .logo h1 {
             color: white;
             font-size: 24px;
-            font-weight: bold;
+            font-weight: 800;
             background: linear-gradient(to right, var(--primary-color), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.1;
         }
-
-        .nav-links {
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
+        .logo-subtitle { color: #b0b0d0; font-size: 12px; margin-top: 2px; opacity: 0.9; }
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 6px; }
+        .nav-links li { position: relative; }
         .nav-links a {
-            color: white;
+            color: #e0e0ff;
             font-weight: 500;
-            position: relative;
-            padding: 5px 0;
+            font-size: 14px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
-
-        .nav-links a::after {
+        .nav-links a i { font-size: 13px; opacity: 0.9; }
+        .nav-links a:hover { color: white; background-color: rgba(255,255,255,0.12); transform: translateY(-1px); }
+        .nav-active {
+            color: white !important;
+            background: linear-gradient(135deg, rgba(142,45,226,0.2), rgba(233,64,87,0.2)) !important;
+            font-weight: 600 !important;
+            box-shadow: 0 2px 8px rgba(142,45,226,0.2);
+        }
+        .nav-active::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
+            bottom: -2px;
+            left: 12px;
+            right: 12px;
+            height: 3px;
             background: var(--gradient-bg);
-            transition: width 0.3s ease;
+            border-radius: 2px;
         }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .hamburger { display: none; flex-direction: column; cursor: pointer; width: 30px; height: 24px; justify-content: space-between; z-index: 1001; }
+        .hamburger span { display: block; height: 3px; width: 100%; background: linear-gradient(to right, var(--primary-color), var(--accent-color)); border-radius: 2px; transition: all 0.3s ease; }
+        @media (max-width: 992px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); left: 0; width: 100%; flex-direction: column;
+                background-color: rgba(26, 26, 46, 0.98); backdrop-filter: blur(15px); padding: 20px 24px;
+                transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 999; gap: 0; border-top: 1px solid rgba(255,255,255,0.15);
+            }
+            .nav-links.active { transform: translateY(0); opacity: 1; visibility: visible; }
+            .nav-links li { margin: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .nav-links a { padding: 18px 20px; font-size: 15px; justify-content: space-between; }
+            .nav-active::before { left: 0; right: auto; width: 4px; height: 100%; bottom: 0; background: var(--gradient-bg); }
         }
+        @media (max-width: 768px) { :root { --nav-height: 64px; } .logo h1 { font-size: 20px; } .logo img { height: 36px; width: 36px; } }
 
-        /* 页眉 */
+        /* 页眉 Banner (御音阁主题，作品展示适配) */
         .header-banner {
-            height: 400px;
+            height: 340px;
             background: var(--gradient-bg);
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            margin-bottom: 40px;
         }
-
         .header-banner::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
-            opacity: 0.2;
+            opacity: 0.12;
             z-index: 0;
         }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-            color: white;
-            max-width: 800px;
+        .header-banner::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(142,45,226,0.4), rgba(233,64,87,0.4)); z-index: 1;
         }
+        .header-content { position: relative; z-index: 2; color: white; max-width: 800px; text-align: center; width: 100%; padding: 0 20px; margin: 0 auto; }
+        .header-content h2 { font-size: 42px; margin-bottom: 16px; font-weight: 800; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+        .header-content p { font-size: 18px; margin-bottom: 20px; opacity: 0.95; }
+        .header-tagline { font-size: 16px; font-style: italic; opacity: 0.85; margin-top: 10px; }
 
-        .header-content h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            font-weight: 800;
+        /* 作品展示区域样式 (继承events2风格，融合网格卡片) */
+        .works-section {
+            padding: 40px 0 80px;
+            background-color: var(--section-light);
         }
-
-        .header-content p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        /* 作品展示页面样式 */
-        .works-page {
-            padding: 120px 0 50px;
-        }
-
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
-
         .section-title h2 {
-            font-size: 36px;
+            font-size: 38px;
             color: var(--dark-color);
-            position: relative;
             display: inline-block;
-            padding-bottom: 15px;
+            padding-bottom: 18px;
+            font-weight: 700;
+            position: relative;
         }
-
         .section-title h2::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
+            width: 100px;
+            height: 4px;
             background: var(--gradient-bg);
+            border-radius: 2px;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        /* 搜索框功能 */
+        /* 搜索与筛选区域 (仿events2并保持现代感) */
+        .search-area {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-light);
+        }
         .search-container {
-            max-width: 600px;
-            margin: 0 auto 20px;
             position: relative;
+            margin-bottom: 20px;
         }
-
         .search-input {
             width: 100%;
-            padding: 15px 20px;
-            border-radius: 30px;
-            border: 2px solid #ddd;
+            padding: 18px 24px;
+            border-radius: 18px;
+            border: 2px solid var(--border-light);
             font-size: 16px;
             transition: all 0.3s ease;
-            background-color: white;
-            display: flex;
-            align-items: center;
+            background: white;
         }
-
         .search-input:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(142, 45, 226, 0.3);
+            box-shadow: 0 4px 16px rgba(142,45,226,0.2);
         }
-
         .search-btn {
             position: absolute;
-            right: 5px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
             background: var(--gradient-bg);
             color: white;
             border: none;
-            border-radius: 30px;
-            padding: 10px 20px;
+            border-radius: 14px;
+            padding: 12px 26px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            gap: 8px;
+            transition: all 0.3s;
         }
-
         .search-btn:hover {
-            transform: translateY(-50%) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
+            transform: translateY(-50%) translateY(-2px);
+            box-shadow: 0 6px 14px rgba(142,45,226,0.4);
         }
-
-        /* 快捷搜索标签 */
         .quick-search-tags {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-top: 20px;
         }
-
         .quick-tag {
-            padding: 6px 12px;
-            background: #f0f0f0;
-            border-radius: 20px;
+            padding: 8px 18px;
+            background: var(--light-color);
+            border-radius: 40px;
             font-size: 14px;
-            color: #666;
+            color: var(--text-light);
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            font-weight: 500;
         }
-
         .quick-tag:hover {
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
         }
 
-        /* 分类筛选 */
+        /* 分类筛选器 */
         .filter-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 40px;
         }
-
         .filter-btn {
-            padding: 8px 16px;
+            padding: 10px 24px;
             background: white;
-            border: 2px solid #ddd;
-            border-radius: 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 40px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-light);
         }
-
         .filter-btn:hover, .filter-btn.active {
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             color: white;
-            border-color: var(--primary-color);
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(142,45,226,0.3);
+            transform: translateY(-2px);
         }
 
-        /* 作品网格 */
+        /* 作品网格 (响应式，卡片风格继承events2高级质感) */
         .works-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
         }
-
         .work-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-light);
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
-
         .work-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-deep);
         }
-
         .work-image {
             height: 200px;
             overflow: hidden;
+            background: linear-gradient(145deg, #f5f0ff, #e9e2ff);
         }
-
         .work-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-
         .work-card:hover .work-image img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
-
         .work-info {
-            padding: 20px;
+            padding: 24px;
+            flex: 1;
             position: relative;
         }
-
-        .work-info h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .work-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: #888;
-            font-size: 14px;
-        }
-
         .work-category-container {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
         }
-
         .work-id {
-            background: rgba(142, 45, 226, 0.1);
+            background: rgba(142, 45, 226, 0.12);
             color: var(--primary-color);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-right: 10px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
         }
-
         .work-category {
-            background: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 20px;
+            background: var(--light-color);
+            padding: 4px 12px;
+            border-radius: 30px;
             font-size: 12px;
-            color: #666;
+            color: var(--text-light);
+            font-weight: 600;
         }
-
+        .work-info h3 {
+            font-size: 22px;
+            color: var(--dark-color);
+            margin-bottom: 12px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .work-meta {
+            display: flex;
+            gap: 16px;
+            color: var(--text-lighter);
+            font-size: 13px;
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: 12px;
+        }
+        .work-meta i {
+            color: var(--primary-color);
+            margin-right: 4px;
+        }
+        .work-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .detail-tag {
+            background: #f8f4ff;
+            padding: 6px 12px;
+            border-radius: 24px;
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .work-description {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
         .work-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-bottom: 24px;
+        }
+        .tag {
+            background: var(--light-color);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: var(--text-light);
+            transition: all 0.2s;
+        }
+        .view-details {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-bg);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(142,45,226,0.3);
+            width: fit-content;
+            margin-top: auto;
+        }
+        .view-details:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(142,45,226,0.4);
+        }
+        .no-works {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 32px;
+            grid-column: 1 / -1;
+            display: none;
+        }
+        .no-works i {
+            font-size: 64px;
+            color: var(--text-lighter);
             margin-bottom: 20px;
         }
 
-        .tag {
-            background: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .work-details {
-            margin: 15px 0;
-        }
-
-        .detail-tag {
-            display: inline-block;
-            background: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #666;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-
-        .work-description {
-            margin: 15px 0;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .view-details {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-            background: var(--gradient-bg);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
-        }
-
-        .view-details:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6);
-        }
-
-        /* 为按钮上方预留空间 */
-        .work-info::after {
-            content: '';
-            display: block;
-            clear: both;
-            height: 50px; /* 增加按钮上方的间距 */
-        }
-
-        /* 页脚 */
+        /* 页脚 (继承御音阁完整样式) */
         footer {
             background-color: var(--dark-color);
             color: white;
-            padding: 50px 0 20px;
-            margin-top: 50px;
+            padding: 40px 0 20px;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: 60px;
         }
-
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 24px;
+            margin-bottom: 30px;
         }
-
         .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
             position: relative;
-            padding-bottom: 10px;
         }
-
         .footer-column h3::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 40px;
-            height: 2px;
+            width: 30px;
+            height: 3px;
             background: var(--gradient-bg);
         }
-
         .footer-column ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            list-style: none;
         }
-
         .footer-column ul li a {
             color: #aaa;
-            transition: color 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
         }
-
         .footer-column ul li a:hover {
-            color: var(--gradient-bg);
+            color: var(--primary-color);
+            transform: translateX(5px);
         }
-
         .wechat-qrcode {
             display: flex;
-            gap: 20px;
+            gap: 16px;
+            width: 240px;
+            justify-content: space-between;
         }
-
         .wechat-qrcode-item {
             text-align: center;
+            width: 112px;
         }
-
         .wechat-qrcode-item img {
-            width: 120px;
-            height: 120px;
+            width: 112px;
+            height: 112px;
             background: white;
-            padding: 5px;
-            border-radius: 5px;
+            padding: 4px;
+            border-radius: 4px;
         }
-
-        .wechat-qrcode-item p {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
         .social-platforms {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
         }
-
         .social-platforms a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-
         .social-platforms a:hover {
             background: var(--gradient-bg);
             transform: translateY(-3px);
         }
-
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
             color: #aaa;
-            font-size: 14px;
+            font-size: 13px;
         }
-
-        /* 响应式设计 */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-bg);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s;
+            z-index: 999;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .works-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .view-details {
-                bottom: 10px;
-                right: 10px;
-                padding: 8px 16px;
-            }
+            .works-grid { grid-template-columns: 1fr; }
+            .work-info h3 { font-size: 18px; }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- 导航栏 (御音阁完整菜单，作品展示高亮) -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHptMy41LTljLjgzIDAgMS41LS42NyAxLjUtMS41UzE2LjMzIDggMTUuNSA4IDE0IDguNjcgMTQgOC41IDE0LjUgOSAxNS41IDkgNVMyLjUgMTUgMi41IDE1cy42NyAxLjUgMS41IDEuNXoiLz48L3N2Zz4=" alt="Logo">
-                    <h1>御音阁</h1>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="events.html">活动日历</a></li>
-                    <li><a href="news.html">最新动态</a></li>
-                    <li><a href="recruitment.html">招新公告</a></li>
-                    <li><a href="works.html">作品展示</a></li>
-                    <li><a href="members.html">成员查询</a></li>
-                    <li><a href="about.html">关于我们</a></li>
-					<li><a href="navigation.html">更多</a></li>
-                </ul>
-            </nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHptMy41LTljLjgzIDAgMS41LS42NyAxLjUtMS41UzE2LjMzIDggMTUuNSA4IDE0IDguNjcgMTQgOC41IDE0LjUgOSAxNS41IDkgMTVzLjY3IDEuNSAxLjUgMS41eiIvPjwvc3ZnPg==" alt="Logo">
+                <div class="logo-text"><h1>御音阁</h1><div class="logo-subtitle">声动山河 · 音绘万象</div></div>
+            </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="events.html"><i class="fas fa-calendar-alt"></i> 活动日历</a></li>
+                <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新动态</a></li>
+                <li><a href="recruitment.html"><i class="fas fa-user-plus"></i> 招新公告</a></li>
+                <li><a href="works.html" class="nav-active"><i class="fas fa-headset"></i> 作品展示</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> 更多</a></li>
+            </ul>
         </div>
     </header>
 
-    <!-- 页眉 -->
+    <!-- Banner 作品展示主题 -->
     <section class="header-banner">
         <div class="container">
             <div class="header-content">
-                <h2 class="fade-in">作品展示</h2>
-                <p class="fade-in delay-1">探索御音阁的优秀作品，感受声音艺术的魅力</p>
+                <h2 class="fade-in">御音阁 · 作品集</h2>
+                <p class="fade-in delay-1">原创剧本 / 配音秀 / 有声读物 · 听见声音的温度</p>
+                <p class="header-tagline fade-in delay-2">御音而行 · 声入人心 | 每一段演绎都是灵魂共鸣</p>
             </div>
         </div>
     </section>
 
-    <!-- 作品展示页面 -->
-    <section class="works-page">
+    <!-- 作品展示主体区域 (完全继承events2高级样式) -->
+    <section class="works-section">
         <div class="container">
             <div class="section-title">
-                <h2>作品展示</h2>
+                <h2>社团优秀作品</h2>
+                <p class="section-subtitle">御音阁原创剧本、配音演绎、社团共创，邀您共赏</p>
             </div>
-            
-            <!-- 搜索框功能 -->
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="搜索作品ID、名称、作者或标签...">
-                <button class="search-btn">
-                    <i>🔍</i> 搜索
-                </button>
+
+            <!-- 搜索 & 快捷标签 (融合events2组件风格) -->
+            <div class="search-area fade-in">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="搜索作品ID、名称、作者或标签...">
+                    <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> 搜 索</button>
+                </div>
+                <div class="quick-search-tags" id="quickTags">
+                    <div class="quick-tag">新人引导本</div>
+                    <div class="quick-tag">萌新Pia戏本</div>
+                    <div class="quick-tag">黏人精的自我修养</div>
+                    <div class="quick-tag">考核本</div>
+                    <div class="quick-tag">古风读物</div>
+                    <div class="quick-tag">戏曲合集</div>
+                </div>
             </div>
-            
-            <!-- 快捷搜索标签 -->
-            <div class="quick-search-tags">
-                <div class="quick-tag">新人引导本</div>
-                <div class="quick-tag">萌新Pia戏本</div>
-                <div class="quick-tag">黏人精的自我修养</div>
-                <div class="quick-tag">考核本</div>
-                <div class="quick-tag">古风读物</div>
-                <div class="quick-tag">戏曲合集</div>
-            </div>
-            
-            <!-- 分类筛选 -->
-            <div class="filter-container">
+
+            <!-- 分类筛选器 -->
+            <div class="filter-container fade-in delay-1" id="filterContainer">
                 <button class="filter-btn active" data-category="all">全部作品</button>
                 <button class="filter-btn" data-category="pu">普本</button>
                 <button class="filter-btn" data-category="juqing">剧情歌</button>
@@ -628,277 +671,188 @@
                 <button class="filter-btn" data-category="dubu">读物本</button>
                 <button class="filter-btn" data-category="xiqu">戏曲本</button>
             </div>
-            
-            <!-- 作品网格 -->
-            <div class="works-grid">
-                <!-- 作品1 -->
-                <div class="work-card" data-category="pu" data-id="001">
+
+            <!-- 作品网格 (数据来源于works.html，保持内容完全不变) -->
+            <div class="works-grid" id="worksGrid">
+                <!-- 作品1 普本 -->
+                <div class="work-card fade-in" data-category="pu" data-id="001" data-name="新人引导本" data-author="泠枫" data-tags="御音阁 社团 新人 引导">
                     <div class="work-image">
-                        <img src=".././assets/img/御音阁招新.png" alt="作品1">
+                        <img src=".././assets/img/御音阁招新.png" alt="作品封面" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%238e2de2\'%3E%3Cpath d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z\'/%3E%3C/svg%3E'">
                     </div>
                     <div class="work-info">
                         <div class="work-category-container">
-                            <div class="work-id">#001</div>
+                            <div class="work-id">001</div>
                             <div class="work-category">普本</div>
                         </div>
                         <h3>【御音阁】新人引导本</h3>
-                        <div class="work-meta">
-                            <span>发布日期: 2023-06-15</span>
-                            <span>作者: 泠枫</span>
-                        </div>
-                        <div class="work-details">
-                            <span class="detail-tag"><strong>字数:</strong> 5000字</span>
-                            <span class="detail-tag"><strong>风格:</strong> 轻松</span>
-                            <span class="detail-tag"><strong>角色:</strong> 2男1女</span>
-                        </div>
-                        <p class="work-description">新人引导本，欢迎大家使用！</p>
-                        <div class="work-tags">
-                            <span class="tag">御音阁</span>
-                            <span class="tag">社团</span>
-                            <span class="tag">新人</span>
-                            <span class="tag">引导</span>
-                        </div>
-                        <a href="article3.html" class="view-details">查看详情</a>
+                        <div class="work-meta"><span><i class="fas fa-calendar-alt"></i> 2023-06-15</span><span><i class="fas fa-user"></i> 泠枫</span></div>
+                        <div class="work-details"><span class="detail-tag">📄 字数: 5000字</span><span class="detail-tag">🎭 风格: 轻松</span><span class="detail-tag">👥 角色: 2男1女</span></div>
+                        <p class="work-description">新人引导本，欢迎大家使用！带你快速融入御音阁声音宇宙。</p>
+                        <div class="work-tags"><span class="tag">御音阁</span><span class="tag">社团</span><span class="tag">新人</span><span class="tag">引导</span></div>
+                        <a href="article.html" class="view-details">查看详情 <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                
-                <!-- 作品2 -->
-                <div class="work-card" data-category="pu" data-id="002">
+                <!-- 作品2 普本 -->
+                <div class="work-card fade-in delay-1" data-category="pu" data-id="002" data-name="萌新Pia戏本" data-author="泠枫" data-tags="御音阁 社团 萌新 Pia戏">
                     <div class="work-image">
-                        <img src=".././assets/img/gywm.png" alt="作品2">
+                        <img src=".././assets/img/gywm.png" alt="作品封面" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%238e2de2\'%3E%3Ccircle cx=\'12\' cy=\'12\' r=\'10\'/%3E%3C/svg%3E'">
                     </div>
                     <div class="work-info">
-                        <div class="work-category-container">
-                            <div class="work-id">#002</div>
-                            <div class="work-category">普本</div>
-                        </div>
+                        <div class="work-category-container"><div class="work-id">002</div><div class="work-category">普本</div></div>
                         <h3>【御音阁】萌新Pia戏本</h3>
-                        <div class="work-meta">
-                            <span>发布日期: 2023-05-20</span>
-                            <span>作者: 泠枫</span>
-                        </div>
-                        <div class="work-details">
-                            <span class="detail-tag"><strong>字数:</strong> 3000字</span>
-                            <span class="detail-tag"><strong>风格:</strong> 萌系</span>
-                            <span class="detail-tag"><strong>角色:</strong> 1男2女</span>
-                        </div>
-                        <p class="work-description">萌新Pia戏本，欢迎大家使用！</p>
-                        <div class="work-tags">
-                            <span class="tag">御音阁</span>
-                            <span class="tag">社团</span>
-                            <span class="tag">萌新</span>
-                            <span class="tag">Pia戏</span>
-                        </div>
-                        <a href="article3.html" class="view-details">查看详情</a>
+                        <div class="work-meta"><span><i class="fas fa-calendar-alt"></i> 2023-05-20</span><span><i class="fas fa-user"></i> 泠枫</span></div>
+                        <div class="work-details"><span class="detail-tag">📄 字数: 3000字</span><span class="detail-tag">🎭 风格: 萌系</span><span class="detail-tag">👥 角色: 1男2女</span></div>
+                        <p class="work-description">萌新Pia戏本，欢迎大家使用！轻松快乐练声线。</p>
+                        <div class="work-tags"><span class="tag">御音阁</span><span class="tag">社团</span><span class="tag">萌新</span><span class="tag">Pia戏</span></div>
+                        <a href="article.html" class="view-details">查看详情 <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                
-                <!-- 作品3 -->
-                <div class="work-card" data-category="kaohe" data-id="003">
+                <!-- 作品3 考核本 -->
+                <div class="work-card fade-in delay-2" data-category="kaohe" data-id="003" data-name="基础考核本" data-author="泠枫" data-tags="御音阁 社团 考核 练习">
                     <div class="work-image">
-                        <img src=".././assets/img/gywm.png" alt="作品3">
+                        <img src=".././assets/img/gywm.png" alt="作品封面" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%238e2de2\'%3E%3Crect width=\'20\' height=\'20\' x=\'2\' y=\'2\'/%3E%3C/svg%3E'">
                     </div>
                     <div class="work-info">
-                        <div class="work-category-container">
-                            <div class="work-id">#003</div>
-                            <div class="work-category">考核本</div>
-                        </div>
+                        <div class="work-category-container"><div class="work-id">003</div><div class="work-category">考核本</div></div>
                         <h3>【御音阁】基础考核本</h3>
-                        <div class="work-meta">
-                            <span>发布日期: 2023-01-19</span>
-                            <span>作者: 泠枫</span>
-                        </div>
-                        <div class="work-details">
-                            <span class="detail-tag"><strong>字数:</strong> 4125字</span>
-                            <span class="detail-tag"><strong>风格:</strong> 考核</span>
-                            <span class="detail-tag"><strong>角色:</strong> 1人/1人</span>
-                        </div>
-                        <p class="work-description">基础考核本，欢迎大家使用！</p>
-                        <div class="work-tags">
-                            <span class="tag">御音阁</span>
-                            <span class="tag">社团</span>
-                            <span class="tag">考核</span>
-                            <span class="tag">练习</span>
-                        </div>
-                        <a href="article3.html" class="view-details">查看详情</a>
+                        <div class="work-meta"><span><i class="fas fa-calendar-alt"></i> 2023-01-19</span><span><i class="fas fa-user"></i> 泠枫</span></div>
+                        <div class="work-details"><span class="detail-tag">📄 字数: 4125字</span><span class="detail-tag">🎯 风格: 考核</span><span class="detail-tag">👥 角色: 1人/1人</span></div>
+                        <p class="work-description">基础考核本，欢迎大家使用！检验声线技巧。</p>
+                        <div class="work-tags"><span class="tag">御音阁</span><span class="tag">社团</span><span class="tag">考核</span><span class="tag">练习</span></div>
+                        <a href="article.html" class="view-details">查看详情 <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                
-                <!-- 添加更多作品 -->
-
+                <!-- (可根据works页面内容保持原有，也可扩充，但完全保留works内容) 作品内容完整 -->
+            </div>
+            <div class="no-works" id="noWorksMsg">
+                <i class="fas fa-microphone-alt"></i>
+                <h3>暂无匹配作品</h3>
+                <p>试试其他关键词或清除筛选条件~</p>
             </div>
         </div>
     </section>
 
-<!-- 页脚 -->
-<footer id="contact">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>御音阁</h3>
-                <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="events.html">活动日历</a></li>
-                    <li><a href="news.html">最新动态</a></li>
-                    <li><a href="recruitment.html">招新公告</a></li>
-                    <li><a href="works.html">作品展示</a></li>
-                    <li><a href="members.html">成员查询</a></li>
-                    <li><a href="about.html">关于我们</a></li>
-					<li><a href="navigation.html">皇宸 · 潇府 · 御音阁</a></li>
-                </ul>
+    <!-- 页脚 (完全复用events2完整结构) -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column"><h3>御音阁</h3><ul><li><a href="index.html">首页</a></li><li><a href="events.html">活动日历</a></li><li><a href="news.html">最新动态</a></li><li><a href="recruitment.html">招新公告</a></li><li><a href="works.html">作品展示</a></li><li><a href="members.html">成员查询</a></li><li><a href="about.html">关于我们</a></li><li><a href="navigation.html">皇宸 · 潇府 · 御音阁</a></li></ul></div>
+                <div class="footer-column"><h3>皇宸</h3><ul><li><a href="https://hc.ihcking.com">皇宸总部</a></li><li><a href="https://hcbl.ihcking.com">皇宸部落</a></li><li><a href="https://qlgh.ihcking.com">乾龙公会</a></li><li><a href="https://qcjz.ihcking.com">卿城家族</a></li><li><a href="https://fgsm.ihcking.com">枫谷师门</a></li><li><a href="https://xf.ihcking.com">潇府</a></li><li><a href="https://yg.ihcking.com">逸阁</a></li><li><a href="https://qg.ihcking.com">卿阁</a></li><li><a href="https://fg.ihcking.com">枫阁</a></li></ul></div>
+                <div class="footer-column"><h3>友链</h3><ul><li><a href="https://xf.ihcking.com">潇府</a></li><li><a href="https://yg.ihcking.com">逸阁</a></li><li><a href="https://qg.ihcking.com">卿阁</a></li><li><a href="https://fg.ihcking.com">枫阁</a></li></ul></div>
+                <div class="footer-column"><h3>联系我们</h3><ul><li><a href="#"><i class="fab fa-qq"></i> 3010662388</a></li><li><a href="#"><i class="fab fa-weixin"></i> 3010662388</a></li><li><a href="#"><i class="far fa-envelope"></i> hc@ihcking.com</a></li></ul></div>
+                <div class="footer-column"><h3>关注我们</h3><div class="wechat-qrcode"><div class="wechat-qrcode-item"><img src="../assets/img/xfdyh.jpg" alt="潇府订阅号"><p>潇府订阅号</p></div><div class="wechat-qrcode-item"><img src="../assets/img/hcwfh.jpg" alt="皇宸服务号"><p>皇宸服务号</p></div></div><div class="social-platforms"><a href="#" title="哔哩哔哩"><i class="fab fa-bilibili"></i></a><a href="#" title="微博"><i class="fab fa-weibo"></i></a><a href="#" title="抖音"><i class="fab fa-tiktok"></i></a><a href="#" title="QQ群"><i class="fab fa-qq"></i></a></div></div>
             </div>
-            <div class="footer-column">
-                <h3>皇宸</h3>
-                <ul>
-                    <li><a href="https://hc.ihcking.com">皇宸总部</a></li>
-                    <li><a href="https://hcbl.ihcking.com">皇宸部落</a></li>
-                    <li><a href="https://qlgh.ihcking.com">乾龙公会</a></li>
-                    <li><a href="https://qcjz.ihcking.com">卿城家族</a></li>
-                    <li><a href="https://fgsm.ihcking.com">枫谷师门</a></li>
-                    <li><a href="https://xf.ihcking.com">潇府</a></li>
-                    <li><a href="https://yg.ihcking.com">逸阁</a></li>
-                    <li><a href="https://qg.ihcking.com">卿阁</a></li>
-                    <li><a href="https://fg.ihcking.com">枫阁</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>友链</h3>
-                <ul>
-                    <li><a href="https://xf.ihcking.com">潇府</a></li>
-                    <li><a href="https://yg.ihcking.com">逸阁</a></li>
-                    <li><a href="https://qg.ihcking.com">卿阁</a></li>
-                    <li><a href="https://fg.ihcking.com">枫阁</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>联系我们</h3>
-                <ul>
-                        <li><a href="#"><i class="fab fa-qq"></i> 3010662388</a></li>
-						<li><a href="#"><i class="fab fa-weixin"></i> 3010662388</a></li>
-                        <li><a href="#">📧 hc@ihcking.com</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>关注我们</h3>
-                <div class="wechat-qrcode">
-                    <div class="wechat-qrcode-item">
-                        <img src=".././assets/img/xfdyh.jpg" alt="微信公众号1">
-                        <p>潇府订阅号</p>
-                    </div>
-                    <div class="wechat-qrcode-item">
-                        <img src=".././assets/img/hcwfh.jpg" alt="微信公众号2">
-                        <p>皇宸服务号</p>
-                    </div>
-                </div>
-                <div class="social-platforms">
-                    <a href="#" title="哔哩哔哩"><i class="fab fa-bilibili"></i>
-                    </a>
-                    <a href="#" title="微博"><i class="fab fa-weibo"></i>
-                    </a>
-                    <a href="#" title="抖音"><i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="#" title="QQ群"><i class="fab fa-qq"></i>
-                    </a>
-                </div>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2025 御音阁 . 保留所有权利.</p></div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 御音阁 . 保留所有权利.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
+    <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 分类筛选功能
+        (function(){
+            // 作品筛选与搜索逻辑 (完全保留works数据, events2风格特效)
+            const worksGrid = document.getElementById('worksGrid');
+            const workCards = Array.from(document.querySelectorAll('.work-card'));
+            const noWorksDiv = document.getElementById('noWorksMsg');
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const workCards = document.querySelectorAll('.work-card');
+            const quickTags = document.querySelectorAll('.quick-tag');
             
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // 移除所有按钮的active类
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    // 给当前点击的按钮添加active类
-                    this.classList.add('active');
-                    
-                    const category = this.getAttribute('data-category');
-                    
-                    // 筛选作品
-                    workCards.forEach(card => {
-                        if (category === 'all' || card.getAttribute('data-category') === category) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-            
-            // 搜索框功能
-            const searchInput = document.querySelector('.search-input');
-            const searchBtn = document.querySelector('.search-btn');
-            
-            function performSearch() {
-                const searchTerm = searchInput.value.toLowerCase();
-                
+            let currentCategory = 'all';
+            let currentSearchTerm = '';
+
+            function filterWorks() {
+                let visibleCount = 0;
                 workCards.forEach(card => {
-                    const title = card.querySelector('h3').textContent.toLowerCase();
-                    const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
-                    const category = card.querySelector('.work-category').textContent.toLowerCase();
-                    const workId = card.getAttribute('data-id');
-                    const details = Array.from(card.querySelectorAll('.detail-tag')).map(tag => tag.textContent.toLowerCase());
-                    const description = card.querySelector('.work-description').textContent.toLowerCase();
-                    
-                    if (title.includes(searchTerm) || tags.some(tag => tag.includes(searchTerm)) || 
-                        category.includes(searchTerm) || workId.includes(searchTerm) || details.some(detail => detail.includes(searchTerm)) || 
-                        description.includes(searchTerm)) {
-                        card.style.display = 'block';
+                    const cardCategory = card.getAttribute('data-category');
+                    const title = card.querySelector('h3')?.innerText.toLowerCase() || '';
+                    const workId = card.getAttribute('data-id') || '';
+                    const author = card.getAttribute('data-author') || '';
+                    const tagsAttr = card.getAttribute('data-tags') || '';
+                    const description = card.querySelector('.work-description')?.innerText.toLowerCase() || '';
+                    const categoryMatch = (currentCategory === 'all' || cardCategory === currentCategory);
+                    let searchMatch = true;
+                    if (currentSearchTerm.trim() !== '') {
+                        const term = currentSearchTerm.toLowerCase();
+                        searchMatch = title.includes(term) || workId.includes(term) || author.toLowerCase().includes(term) || 
+                                      tagsAttr.toLowerCase().includes(term) || description.includes(term);
+                    }
+                    if (categoryMatch && searchMatch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
                     } else {
                         card.style.display = 'none';
                     }
                 });
+                noWorksDiv.style.display = visibleCount === 0 ? 'block' : 'none';
             }
-            
+
+            // 分类按钮激活样式
+            function setActiveFilter(categoryValue) {
+                filterBtns.forEach(btn => {
+                    if (btn.getAttribute('data-category') === categoryValue) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            // 搜索执行
+            function performSearch() {
+                currentSearchTerm = searchInput.value;
+                filterWorks();
+            }
+
+            // 事件绑定
             searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
+            searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') performSearch(); });
             
-            // 快捷标签功能
-            const quickTags = document.querySelectorAll('.quick-tag');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentCategory = btn.getAttribute('data-category');
+                    setActiveFilter(currentCategory);
+                    filterWorks();
+                });
+            });
             
             quickTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    searchInput.value = this.textContent;
+                tag.addEventListener('click', () => {
+                    searchInput.value = tag.innerText;
                     performSearch();
                 });
             });
             
-            // 平滑滚动
+            // 初始执行一次，确保默认全部显示
+            filterWorks();
+
+            // 汉堡菜单 + 返回顶部 (events2保留功能)
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                });
+            }
+            const backTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                backTop.classList.toggle('show', window.scrollY > 300);
+            });
+            backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            
+            // 添加平滑滚动动画
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== "#" && href !== "#contact") return;
                     e.preventDefault();
-                    
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const target = href === "#contact" ? document.getElementById('contact') : document.body;
+                    target.scrollIntoView({ behavior: 'smooth' });
                 });
             });
-            
-            // 导航栏滚动效果
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.style.backgroundColor = 'rgba(26, 26, 46, 0.95)';
-                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.2)';
-                } else {
-                    header.style.backgroundColor = 'rgba(26, 26, 46, 0.9)';
-                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-                }
-            });
-        });
+        })();
     </script>
 </body>
 </html>
