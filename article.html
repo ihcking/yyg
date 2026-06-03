@@ -7,7 +7,6 @@
     <meta name="description" content="御音阁社团基础考核本 - 普通话、气息、戏感、伪音全方位评测，长期纳新，不拒新声！">
     <meta name="keywords" content="御音阁,配音社团,戏鲸,配音秀,考核本,配音考核,CV考核,有声创作">
     
-    <!-- favicon 沿用统一资源 -->
     <link rel="icon" type="image/x-icon" href=".././assets/img/icon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href=".././assets/img/icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href=".././assets/img/icon/favicon-16x16.png">
@@ -15,7 +14,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== 基础变量 & 全局风格（完全继承events2现代特效）========== */
+        /* 基础变量与全局风格 (完全继承events2现代特效) */
         * {
             margin: 0;
             padding: 0;
@@ -60,23 +59,7 @@
         a { text-decoration: none; color: inherit; transition: all 0.25s ease; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
 
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            background: var(--gradient-bg);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(142, 45, 226, 0.3);
-            font-size: 15px;
-            letter-spacing: 0.3px;
-        }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(142, 45, 226, 0.4); }
-
-        /* ************ 导航栏 (events2现代特效) ************ */
+        /* 导航栏 */
         header {
             background-color: rgba(26, 26, 46, 0.98);
             position: fixed;
@@ -191,7 +174,7 @@
         .header-content p { font-size: 18px; margin-bottom: 20px; opacity: 0.95; }
         .header-tagline { font-size: 16px; font-style: italic; opacity: 0.85; margin-top: 10px; }
 
-        /* 考核本布局：左侧边栏+右侧内容 */
+        /* 考核本布局 */
         .recruitment-section {
             padding: 20px 0 80px;
             background-color: var(--section-light);
@@ -226,7 +209,6 @@
             gap: 30px;
             flex-direction: row;
         }
-        /* 左侧边栏 (考核信息) */
         .sidebar {
             width: 320px;
             background: white;
@@ -237,11 +219,9 @@
             position: sticky;
             top: 100px;
             border: 1px solid var(--border-light);
-            transition: all 0.3s;
             flex-shrink: 0;
             order: 1;
         }
-        /* 右侧主内容 */
         .main-content {
             flex: 1;
             min-width: 300px;
@@ -321,7 +301,7 @@
         }
         .more-works-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6); }
 
-        /* 音频播放器（高级自定义） */
+        /* 音频播放器 - 增强进度条与拖拽点 */
         .audio-player-container {
             width: 100%;
             background: white;
@@ -335,17 +315,121 @@
             border: 1px solid rgba(142,45,226,0.2);
         }
         .audio-player { padding: 20px; }
+        
+        .progress-wrapper {
+            position: relative;
+            width: 100%;
+            margin: 12px 0 8px;
+            height: 8px;
+        }
         .progress-container {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background-color: #e2e2e2;
             border-radius: 10px;
-            margin: 12px 0 8px;
-            cursor: pointer;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
-        .progress-bar { height: 100%; background: var(--gradient-bg); border-radius: 10px; width: 0; }
-        .time-display { font-size: 12px; color: #888; margin-bottom: 8px; }
-        .audio-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-bg);
+            border-radius: 10px;
+            width: 0%;
+        }
+        /* 可拖拽滑块 - 修正位置，使圆点可见且对齐进度条中心 */
+        .seek-slider {
+            position: absolute;
+            top: -5px;          /* 让滑块上下居中于8px高度的进度条 (thumb高度18px，偏移-5px使中心对齐) */
+            left: 0;
+            width: 100%;
+            height: 18px;
+            background: transparent;
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .seek-slider:focus {
+            outline: none;
+        }
+        .seek-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            transition: 0.1s;
+            margin-top: 0px;
+        }
+        .seek-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--accent-color);
+        }
+        .seek-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+        .seek-slider::-webkit-slider-runnable-track {
+            height: 18px;
+            background: transparent;
+            border: none;
+        }
+        .seek-slider::-moz-range-track {
+            background: transparent;
+            height: 18px;
+        }
+        .time-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 6px 0 12px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .jump-time-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f5f5f7;
+            padding: 6px 12px;
+            border-radius: 40px;
+        }
+        .jump-time-control input {
+            width: 90px;
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 13px;
+            text-align: center;
+            background: white;
+        }
+        .jump-time-control button {
+            background: var(--gradient-bg);
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
         .audio-controls button {
             background: var(--gradient-bg);
             color: white;
@@ -356,8 +440,19 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .volume-control { display: flex; align-items: center; gap: 8px; margin-left: 5px; }
-        .playlist-toggle { margin-left: auto; background: var(--gradient-bg); border-radius: 50%; width: 38px; height: 38px; }
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 5px;
+        }
+        .playlist-toggle {
+            margin-left: auto;
+            background: var(--gradient-bg);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+        }
         .playlist {
             max-height: 0;
             overflow-y: hidden;
@@ -365,11 +460,23 @@
             margin-top: 12px;
             border-top: 1px solid #eee;
         }
-        .playlist.open { max-height: 280px; overflow-y: auto; }
-        .playlist-item { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: 0.2s; border-radius: 12px; margin: 4px 0; }
-        .playlist-item:hover { background: rgba(142,45,226,0.08); }
-        .playlist-item.active { background: rgba(142,45,226,0.15); font-weight: 600; color: var(--primary-color); }
-
+        .playlist.open {
+            max-height: 280px;
+            overflow-y: auto;
+        }
+        .playlist-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: 0.2s;
+            border-radius: 12px;
+            margin: 4px 0;
+        }
+        .playlist-item.active {
+            background: rgba(142,45,226,0.15);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
         .warning {
             background: #fff6e5;
             border-left: 5px solid #ffb347;
@@ -388,21 +495,11 @@
         p { margin-bottom: 10px; line-height: 1.7; }
         .fade-in { animation: fadeIn 0.8s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .delay-1 { animation-delay: 0.1s; }
-
-        /* 页脚完全继承events2风格 + 修复标题显示问题 */
+        
+        /* 页脚 */
         footer { background-color: var(--dark-color); color: white; padding: 40px 0 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; margin-top: 60px; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 30px; }
-        .footer-column h3 { 
-            font-size: 18px; 
-            margin-bottom: 16px; 
-            padding-bottom: 8px; 
-            position: relative; 
-            color: #ffffff !important;    /* 强制白色，确保标题可见 */
-            font-weight: 700; 
-            letter-spacing: 0.5px;
-            border-bottom: none;
-        }
+        .footer-column h3 { font-size: 18px; margin-bottom: 16px; padding-bottom: 8px; position: relative; color: #ffffff !important; font-weight: 700; }
         .footer-column h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 36px; height: 3px; background: var(--gradient-bg); border-radius: 2px; }
         .footer-column ul li { margin-bottom: 8px; list-style: none; }
         .footer-column ul li a { color: #ccc; font-size: 14px; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
@@ -453,7 +550,6 @@
             </div>
 
             <div class="recruitment-content">
-                <!-- 左侧：考核信息栏 -->
                 <div class="sidebar">
                     <h3>📌 考核信息</h3>
                     <div class="script-info">
@@ -474,14 +570,25 @@
                     <div class="more-works"><h3>🎧 更多作品</h3><a href="works1.html" class="more-works-btn">查看全部作品</a></div>
                 </div>
 
-                <!-- 右侧：完整考核内容 (保留article所有文本无删减) -->
                 <div class="main-content">
-                    <!-- 音频播放器 -->
+                    <!-- 音频播放器增强版 -->
                     <div class="audio-player-container">
                         <div class="audio-player">
-                            <div class="audio-info"><p>🎧 考核背景音 / 练习BGM</p>
-                                <div class="progress-container"><div class="progress-bar"></div></div>
-                                <div class="time-display"><span id="current-time">0:00</span> / <span id="total-time">0:00</span></div>
+                            <p>🎧 考核BGM / 练习BGM</p>
+                            <div class="progress-wrapper">
+                                <div class="progress-container">
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <input type="range" id="seekSlider" class="seek-slider" min="0" max="100" step="0.01" value="0">
+                            </div>
+                            <div class="time-row">
+                                <div class="time-display">
+                                    <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+                                </div>
+                                <div class="jump-time-control">
+                                    <input type="text" id="jumpTimeInput" placeholder="mm:ss 或 秒数" value="0:00">
+                                    <button id="jumpTimeBtn"><i class="fas fa-location-dot"></i> 跳转</button>
+                                </div>
                             </div>
                             <div class="audio-controls">
                                 <button id="play-btn"><i class="fas fa-play"></i></button>
@@ -505,6 +612,7 @@
                     <p style="text-align: center; font-weight: 500;">长期纳新，不拒新！<br>小群体，无事生非，言语粗鲁，引战开瓜，请绕道而行！<br>主要招收：编剧/创作，设计/美工，摄影/后期，歌手/主持，CV等，期待你的加入！</p>
                     <center><div class="warning"><strong>⚠️ 待考核通过，方可申请加入社团，否则一概拒绝申请 !</strong></div></center>
                     
+                    <!-- 完整考核内容（与原稿完全一致） -->
                     <h3>📋 考前须知：</h3>
                     <p>1. 本社团考核秉持公平、公正、公开的原则；<br>2. 考核人员请端正态度，互相尊重，认真对待以下考核。<br>3. 考核人员须保证麦口清晰、避免环境音嘈杂。</p>
                     <center><div class="warning"><strong>✨ 祝大家考核顺利，一路前行，御音阁欢迎你!</strong></div></center>
@@ -536,215 +644,73 @@
                     <p>yǎo jǐn zì tóu guī zì wěi ，yīn yáng shǎng qù jì biàn shēng 。</p>
                     <p>咬紧字头归字尾，阴阳上去记变声。</p><br>
                     <p>xún xù jiàn jìn jiān chí liàn ，bù nán dá dào chún hé qīng 。</p>
-                    <p>循序渐进坚持练，不难达到纯和清。</p><br>
-					
+                    <p>循序渐进坚持练，不难达到纯和清。</p><br>					
                     <h3>💨 03:15 第三部分：气息</h3>
                     <div class="warning"><strong>考核要求：选择一段，深吸一口气，不换气的读完，气息稳而绵长，坚持的越久越好</strong></div>
-				
-                    <p>（一）、数数练习</p><br>
-                    <p>1，2，3，4，5，6，.........30...40，45，50，55，60........100...</p><br>
-                    
-                    <p>（二）、数枣练习</p><br>
-                    <p>出东门，过大桥，大桥前面一树枣，拿着竿子去打枣，青的多，红的少。</p><br>
-                    <p>一个枣，两个枣，三个枣，四个枣，五个枣，六个枣，七个枣，八个枣，九个枣，十个枣，十个枣，九个枣，八个枣，七个枣，六个枣，五个枣，四个枣，三个枣，两个枣，一个枣。</p><br>
-                    <p>这是一个绕口令，一口气说完才算好。</p><br>
-                    
-                    <p>（三）、数葫芦</p><br>
-                    <p>南园里有一堆葫芦，结的滴沥嘟噜，甜葫芦，苦葫芦，红葫芦，鼓葫芦，好汉能说出二十四个葫芦:</p><br>
-                    <p>一个葫芦、两个葫芦、三个葫芦、四个葫芦....</p><br>
-                    
-                    <p>（四）、数旗</p><br>
-                    <p>广场上飘红旗，我来数数几面旗?</p><br>
-                    <p>一面旗，两面旗，三面旗，四面旗，五面旗，六面旗......一共看到N面旗</p><br>
-                    
-                    <p>（五）、气息运用</p><br>
-                    <p>害怕时的气息；寒冷时的气息；急促时的气息；疼痛时的气息；舒服时的气息。</p><br>
+                    <p>（一）、数数练习</p><p>1，2，3，4，5，6，.........30...40，45，50，55，60........100...</p><br>
+                    <p>（二）、数枣练习</p><p>出东门，过大桥，大桥前面一树枣，拿着竿子去打枣，青的多，红的少。</p><p>一个枣，两个枣，三个枣，四个枣，五个枣，六个枣，七个枣，八个枣，九个枣，十个枣。</p><p>十个枣，九个枣，八个枣，七个枣，六个枣，五个枣，四个枣，三个枣，两个枣，一个枣。</p><p>这是一个绕口令，一口气说完才算好。</p><br>
+                    <p>（三）、数葫芦</p><p>南园里有一堆葫芦，结的滴沥嘟噜，甜葫芦，苦葫芦，红葫芦，鼓葫芦。</p><p>好汉能说出二十四个葫芦: 一个葫芦、两个葫芦、三个葫芦、四个葫芦....</p><br>
+                    <p>（四）、数旗</p><p>广场上飘红旗，我来数数几面旗? 一面旗，两面旗，三面旗，四面旗，五面旗，六面旗......一共看到N面旗</p><br>
+                    <p>（五）、气息运用</p><p>害怕时的气息；寒冷时的气息；急促时的气息；疼痛时的气息；舒服时的气息。</p><br>
 					
                     <h3>🌀 04:35 第四部分：绕口令</h3>
                     <div class="warning"><strong>考核要求：选择其中两段，完整流畅、字音准确</strong></div>
-                    <p>1.《捉兔》</p><br>
-                    <p>一位爷爷他姓顾，上街打醋又买布。买了布，打了醋，回头看见鹰抓兔。放下布，搁下醋，上前去追鹰和兔，飞了鹰，跑了兔。打翻醋，醋湿布。</p><br>
-                    
-                    <p>2.《小猪》</p><br>
-                    <p>小猪扛锄头，吭哧吭哧走。小鸟唱枝头，小猪扭头瞅，锄头撞石头，石头砸猪头。小猪怨锄头，锄头怨猪头。</p><br>
-                    
-                    <p>3《白石塔》</p><br>
-                    <p>白石白又滑，搬来白石搭白塔。白石塔，白石塔，白石搭石塔，白塔白石搭。搭好白石塔，白塔白又滑。</p><br>
-                    
-                    <p>4.《花鸭与彩霞》</p><br>
-                    <p>水中映着彩霞，水血游着花鸭。霞是五彩霞，鸭是麻花鸭。麻花鸭游进五彩霞，五彩露网仕麻花鸭。乐坏了鸭，拍碎了霞，分不清是鸭还是霞。</p><br>
-                    
-                    <p>5.《四和十》</p><br>
-                    <p>四和十，十和四，十四和四十，四十和十四。说好四和十得靠舌头和牙齿。谁说四十是“细席”，他的舌头没用力;谁说十四是“适时”，他的舌头没伸直。认真学，常炼习，十四、四十、四十四。</p><br>
-                    
-                    <p>6.《慈过河》</p><br>
-                    <p>哥哥弟弟坡前坐，坡上卧着一只鹅，坡下流着一条河，哥哥说：宽宽的河，弟弟说：白白的鹅。鹅要过河，河要渡鹅。不知是鹅过河，还是河渡鹅。</p><br>
-                    
-                    <p>7.《颠倒欲》</p><br>
-                    <p>咬牛奶，喝面包，夹着火车上皮包。东西街，南北走，出门看见人咬狗。拿起狗来打砖头，又怕砖头咬我手。</p><br>
-                    
-                    <p>8.《兜装豆》</p><br>
-                    <p>兜里装豆，豆装满兜，兜破漏豆。倒出豆，补破兜，补好兜，又装豆，装满兜，不漏豆。</p><br>
-                    
-                    <p>9.《狗与猴》</p><br>
-                    <p>树上卧只猴，树下蹲条狗。猴跳下来撞了狗，狗翻起来咬住猴，不知是猴咬狗，还是狗咬猴。</p><br>
-                    
-                    <p>10.《河里有只船》</p><br>
-                    <p>河里有只船，船上挂白帆，风吹帆张船向前，无风帆落停下船。</p><br>
-                    
-                    <p>11.《汤烫塔》</p><br>
-                    <p>老唐端蛋汤，踏凳登宝塔，只因凳太滑，汤洒汤烫塔。</p><br>
-                    
-                    <p>12.《蚕和蝉》</p><br>
-                    <p>这是蚕，那是蝉，蚕常在叶里藏，蝉常在林里唱。</p><br>
-                    
-                    <p>13.《六十六头牛》</p><br>
-                    <p>六十六岁的陆老头，盖了六十六间楼，买了六十六篑油，养了六十六头牛，栽了六十六梯重杨柳。六十六篓油，堆在六十六间楼;六十六头牛，扣在六十六棵垂杨柳。忽然一阵狂风起,吹倒了六十六间楼，翻倒了六十六篓油，折断了六十六梯重杨柳，砸死了六十六头牛，急煞了六十六岁的陆老头。</p><br>
-                    
-                    <p>14.《任命、人名》</p><br>
-                    <p>任命是任命，人名是人名，任命人名不能错，错了人名错任命。</p><br>
-                    
-                    <p>15.《枪和糠》</p><br>
-                    <p>墙上一个面，窗上一支枪，窗下一箩糠。枪落进了糠，糠埋住了枪，窗要糠让枪，糠要枪上墙，墙要枪上面。互相不退让，镜赶不走枪，枪也上不了窗和墙。</p><br>
-                    
-                    <p>16.《白果树》</p><br>
-                    <p>我从伯伯门前过，看见伯爹伯妈门前种着白果树，白果树上站着百十百个白斑鸠，我就拣了百十百块白石头，打那百十百个白斑鸠。</p><br>
-                    
-                    <p>17.《好孩子》</p><br>
-                    <p>张家有个小英子，王家有个小柱子。张家的小英子，自己穿衣洗袜子，天天扫地擦桌子，王家的小柱子，捡到一只皮夹子，还给后院大婶子。小英子，小柱子，他们部是好孩子。</p><br>
-                    
-                    <p>18.《送花》</p><br>
-                    <p>华华有两朵红花，红红有两朵黄花，华华想要黄花，红红想要红花，华华送给红红一朵红花，红红送给华华一朵黄花。</p><br>
-                    
+                    <p>1.《捉兔》一位爷爷他姓顾，上街打醋又买布。买了布，打了醋，回头看见鹰抓兔。放下布，搁下醋，上前去追鹰和兔，飞了鹰，跑了兔。打翻醋，醋湿布。</p><br>
+                    <p>2.《小猪》小猪扛锄头，吭哧吭哧走。小鸟唱枝头，小猪扭头瞅，锄头撞石头，石头砸猪头。小猪怨锄头，锄头怨猪头。</p><br>
+                    <p>3.《白石塔》白石白又滑，搬来白石搭白塔。白石塔，白石塔，白石搭石塔，白塔白石搭。搭好白石塔，白塔白又滑。</p><br>
+                    <p>4.《花鸭与彩霞》水中映着彩霞，水血游着花鸭。霞是五彩霞，鸭是麻花鸭。麻花鸭游进五彩霞，五彩露网仕麻花鸭。乐坏了鸭，拍碎了霞，分不清是鸭还是霞。</p><br>
+                    <p>5.《四和十》四和十，十和四，十四和四十，四十和十四。说好四和十得靠舌头和牙齿。谁说四十是“细席”，他的舌头没用力;谁说十四是“适时”，他的舌头没伸直。认真学，常炼习，十四、四十、四十四。</p><br>
+                    <p>6.《慈过河》哥哥弟弟坡前坐，坡上卧着一只鹅，坡下流着一条河，哥哥说：宽宽的河，弟弟说：白白的鹅。鹅要过河，河要渡鹅。不知是鹅过河，还是河渡鹅。</p><br>
+                    <p>7.《颠倒欲》咬牛奶，喝面包，夹着火车上皮包。东西街，南北走，出门看见人咬狗。拿起狗来打砖头，又怕砖头咬我手。</p><br>
+                    <p>8.《兜装豆》兜里装豆，豆装满兜，兜破漏豆。倒出豆，补破兜，补好兜，又装豆，装满兜，不漏豆。</p><br>
+                    <p>9.《狗与猴》树上卧只猴，树下蹲条狗。猴跳下来撞了狗，狗翻起来咬住猴，不知是猴咬狗，还是狗咬猴。</p><br>
+                    <p>10.《河里有只船》河里有只船，船上挂白帆，风吹帆张船向前，无风帆落停下船。</p><br>
+                    <p>11.《汤烫塔》老唐端蛋汤，踏凳登宝塔，只因凳太滑，汤洒汤烫塔。</p><br>
+                    <p>12.《蚕和蝉》这是蚕，那是蝉，蚕常在叶里藏，蝉常在林里唱。</p><br>
+                    <p>13.《六十六头牛》六十六岁的陆老头，盖了六十六间楼，买了六十六篑油，养了六十六头牛，栽了六十六梯重杨柳。六十六篓油，堆在六十六间楼;六十六头牛，扣在六十六棵垂杨柳。忽然一阵狂风起,吹倒了六十六间楼，翻倒了六十六篓油，折断了六十六梯重杨柳，砸死了六十六头牛，急煞了六十六岁的陆老头。</p><br>
+                    <p>14.《任命、人名》任命是任命，人名是人名，任命人名不能错，错了人名错任命。</p><br>
+                    <p>15.《枪和糠》墙上一个面，窗上一支枪，窗下一箩糠。枪落进了糠，糠埋住了枪，窗要糠让枪，糠要枪上墙，墙要枪上面。互相不退让，镜赶不走枪，枪也上不了窗和墙。</p><br>
+                    <p>16.《白果树》我从伯伯门前过，看见伯爹伯妈门前种着白果树，白果树上站着百十百个白斑鸠，我就拣了百十百块白石头，打那百十百个白斑鸠。</p><br>
+                    <p>17.《好孩子》张家有个小英子，王家有个小柱子。张家的小英子，自己穿衣洗袜子，天天扫地擦桌子，王家的小柱子，捡到一只皮夹子，还给后院大婶子。小英子，小柱子，他们部是好孩子。</p><br>
+                    <p>18.《送花》华华有两朵红花，红红有两朵黄花，华华想要黄花，红红想要红花，华华送给红红一朵红花，红红送给华华一朵黄花。</p><br>
+					
                     <h3>📖 05:55 第五部分：诵读</h3>
                     <div class="warning"><strong>考核要求：选择其中两段，完整流畅、注意停顿和重音、咬字清晰、情绪准确</strong></div>
-                    <p>（一）、旁白</p><br>
-                    <p>中国人说：靠山吃山、靠海吃海。这不仅是一种因地制宜的变通，更是顺应自然的中国式生存之道。从古到今，这个农耕民族精心使用着脚下的每一寸土地，获取食物的活动和非凡智慧，无处不在。</p><br>
-                    <p style="text-align: right;">——《舌尖上的中国》</p><br>
-                    
-                    <p>午门，一直是紫禁城最重要的入口，从帝王将相到寻常百姓，它见证了这座古老宫殿的全部历史和几乎所有的过客。今日，与午门一同静候各地游客的，是这间展厅内的453件展品，它们能瞬间带着人们穿梭时光，回到1420年，亲历600年前紫禁城建成的时刻。</p><br>
-                    <p style="text-align: right;">——《我在故宫六百年》</p><br>
-                    
-                    <p>（二）、诗歌散文</p><br>
-                    <p>夕阳西下，晚霞轻柔地洒在可可西里的土地上，宁静而贫瘠的土地仿佛又多了几分生气。我呆呆地伫立在寒风中，影子拉得很远很远.……我的脚下就是我刚刚死去的丈夫和女儿，他们已经被蹂躏得面目全非，四周满是我部族的尸体，他们的皮全部被扒光。空气中弥漫着血腥气，地上血流成河。在夕阳的照耀下，显得愈加惨烈。我，这场大屠杀中唯一的幸存者，便成了可可西里最后的一只藏羚羊。</p><br>
-                    <p style="text-align: right;">——《最后一只藏羚羊（节选一）》</p><br>
-                    
-                    <p>我曾经无比自豪于自己是一只藏羚羊，我们生活在遥远的可可西里，那里气候恶劣，土地贫瘠，可我们却有着惊人的耐力。什么水草丰茂之地，对我们没有任何吸引力，我们常常悠然地卧在雪中，或是在猛烈的冰雹下嬉戏。那时的可可西里之于我们，无异于世外桃源，那梦一般的世界曾经是多么的美丽。然而，一声枪响穿透了可可西里的黎明，我的梦被击的粉碎。当一辆辆吉普在高原上奔驰的时候，我的无数同伴也好奇地紧随其后要和他比个高低，追逐嘛，这是我们常玩的游戏……然而这一次我们却只猜对了开头，却猜不着这结局，一只只黑洞洞的枪口正悄悄举起……从那一刻起我的种族的大杀戮便开始了，静谧的可可西里被枪声毁掉了。</p><br>
-                    <p style="text-align: right;">——《最后一只藏羚羊（节选二）》</p><br>
-                    
-                    <p>从明天起，做一个幸福的人</p><br>
-                    <p>喂马，劈柴，周游世界</p><br>
-                    <p>从明天起，关心粮食和蔬菜</p><br>
-                    <p>我有一所房子，面朝大海，春暖花开</p><br>
-                    
-                    <p style="text-align: right;">——《面朝大海，春暖花开（节选）》海子</p><br>
-                    
-                    <p>我是你河边上破旧的老水车</p><br>
-                    <p>数百年来纺着疲惫的歌</p><br>
-                    <p>我是你额上熏黑的矿灯</p><br>
-                    <p>照你在历史的隧洞里蜗行摸索</p><br>
-                    <p>我是干瘪的稻穗，是失修的路基</p><br>
-                    <p>是淤滩上的驳船</p><br>
-                    <p>把纤绳深深</p><br>
-                    <p>勒进你的肩膊</p><br>
-                    
-                    <p style="text-align: right;">——《祖国啊，我亲爱的祖国（节选）》舒婷</p><br>
+                    <p>（一）、旁白</p><p>中国人说：靠山吃山、靠海吃海。这不仅是一种因地制宜的变通，更是顺应自然的中国式生存之道。从古到今，这个农耕民族精心使用着脚下的每一寸土地，获取食物的活动和非凡智慧，无处不在。</p><p style="text-align: right;">——《舌尖上的中国》</p><br>
+                    <p>午门，一直是紫禁城最重要的入口，从帝王将相到寻常百姓，它见证了这座古老宫殿的全部历史和几乎所有的过客。今日，与午门一同静候各地游客的，是这间展厅内的453件展品，它们能瞬间带着人们穿梭时光，回到1420年，亲历600年前紫禁城建成的时刻。</p><p style="text-align: right;">——《我在故宫六百年》</p><br>
+                    <p>（二）、诗歌散文</p><p>夕阳西下，晚霞轻柔地洒在可可西里的土地上，宁静而贫瘠的土地仿佛又多了几分生气。我呆呆地伫立在寒风中，影子拉得很远很远.……我的脚下就是我刚刚死去的丈夫和女儿，他们已经被蹂躏得面目全非，四周满是我部族的尸体，他们的皮全部被扒光。空气中弥漫着血腥气，地上血流成河。在夕阳的照耀下，显得愈加惨烈。我，这场大屠杀中唯一的幸存者，便成了可可西里最后的一只藏羚羊。</p><p style="text-align: right;">——《最后一只藏羚羊（节选一）》</p><br>
+                    <p>我曾经无比自豪于自己是一只藏羚羊，我们生活在遥远的可可西里，那里气候恶劣，土地贫瘠，可我们却有着惊人的耐力。什么水草丰茂之地，对我们没有任何吸引力，我们常常悠然地卧在雪中，或是在猛烈的冰雹下嬉戏。那时的可可西里之于我们，无异于世外桃源，那梦一般的世界曾经是多么的美丽。然而，一声枪响穿透了可可西里的黎明，我的梦被击的粉碎。当一辆辆吉普在高原上奔驰的时候，我的无数同伴也好奇地紧随其后要和他比个高低，追逐嘛，这是我们常玩的游戏……然而这一次我们却只猜对了开头，却猜不着这结局，一只只黑洞洞的枪口正悄悄举起……从那一刻起我的种族的大杀戮便开始了，静谧的可可西里被枪声毁掉了。</p><p style="text-align: right;">——《最后一只藏羚羊（节选二）》</p><br>
+                    <p>从明天起，做一个幸福的人</p><p>喂马，劈柴，周游世界</p><p>从明天起，关心粮食和蔬菜</p><p>我有一所房子，面朝大海，春暖花开</p><p style="text-align: right;">——《面朝大海，春暖花开（节选）》海子</p><br>
+                    <p>我是你河边上破旧的老水车</p><p>数百年来纺着疲惫的歌</p><p>我是你额上熏黑的矿灯</p><p>照你在历史的隧洞里蜗行摸索</p><p>我是干瘪的稻穗，是失修的路基</p><p>是淤滩上的驳船</p><p>把纤绳深深</p><p>勒进你的肩膊</p><p style="text-align: right;">——《祖国啊，我亲爱的祖国（节选）》舒婷</p><br>
+                    <p>（三）、古诗</p><p>春花秋月何时了？往事知多少。小楼昨夜又东风，故国不堪回首月明中。</p><p>雕栏玉砌应犹在，只是朱颜改。问君能有几多愁？恰似一江春水向东流。</p><p style="text-align: right;">——《虞美人·春花秋月何时了》李煜</p><br>
+                    <p>十年生死两茫茫，不思量，自难忘。千里孤坟，无处话凄凉。</p><p>纵使相逢应不识，尘满面，鬓如霜。</p><p>夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。</p><p>料得年年肠断处，明月夜，短松冈。</p><p style="text-align: right;">——《江城子·乙卯正月二十日夜记梦》苏轼</p><br>
 					
-                    <p>（三）、古诗</p><br>
-                    <p>春花秋月何时了？往事知多少。小楼昨夜又东风，故国不堪回首月明中。</p><br>
-                    <p>雕栏玉砌应犹在，只是朱颜改。问君能有几多愁？恰似一江春水向东流。</p><br>
-                    
-                    <p style="text-align: right;">——《虞美人·春花秋月何时了》李煜</p><br>
-                    
-                    <p>十年生死两茫茫，不思量，自难忘。千里孤坟，无处话凄凉。</p><br>
-                    <p>纵使相逢应不识，尘满面，鬓如霜。</p><br>
-                    <p>夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。</p><br>
-                    <p>料得年年肠断处，明月夜，短松冈。</p><br>
-                    
-                    <p style="text-align: right;">——《江城子·乙卯正月二十日夜记梦》苏轼</p><br>
-                    
                     <h3>🎭 08:06 第六部分：戏感</h3>
                     <div class="warning"><strong>考核要求：选择三段，情绪准确到位</strong></div>
                     <p>悲痛：为什么...我们说好的一起仗剑天涯，劫富济贫，可最后你却变成了朝廷的鹰爪...</p><br>
-                    
                     <p>温柔：在外可要照顾好自己，想我的时候就给我书信，有什么好玩的趣事可也一定要告诉我..</p><br>
-                    
                     <p>气愤：怎么？这才三年不见，你都做了什么！还要我怎么去包容你，我受够了！</p><br>
-                    
                     <p>冷漠：这句话我已经说了很多遍，可你却依旧如此，我们之间已经没有什么好谈的了。</p><br>
-                    
                     <p>诱惑：这是去哪呢？如此良辰美景，不如我们玩一点好玩的游戏，然后我再告诉你..</p><br>
-                    
                     <p>阴狠：我当然知道啊，但是你以为这就结束了？我告诉你们，就算事情暴露了我也要拉着你们陪葬...准备好好享受吧..</p><br>
-                    
                     <p>生气：你能不能好好说话，每次一点点事情你就夹枪带棒的，还觉得自己挺有理的！麻烦你稍微用点脑子好吧！</p><br>
-                    
                     <p>爆发：你为什么要这样对小宝！他才几岁啊！他知道什么！有什么事你冲我来啊！我再也不会原谅你了！</p><br>
-                    
                     <p>哭泣：明明约好的在桃花树下把酒言欢，可你为何还躺在那里，你起来...起来啊...对不起..</p><br>
-                    
                     <p>开心：现在是2025年5月20日，今天呢，终于可以和宝宝一起出去吃大餐了！这次我一定要多吃一点！</p><br>
-                    
                     <p>悲伤：我一直记得我们儿时的约定，没想到，最后连你也要弃我而去...</p><br>
-                    
                     <p>阴险：没想到，我谋划了这么多年，今日终于等到了，又岂能错失如此良机。</p><br>
-                    
                     <p>惊恐：什么动静！！是....是你！！！你居然没死！！！当年害死你的不是我！是他们！！你听我解释！！！</p><br>
-                    
                     <p>醉态：我...我没醉..你才醉了..说好的明天陪我一起去山上，可不能抵赖..不然..</p><br>
-                    
                     <p>濒死：对..不起..我说过..要陪你一起去华山之巅..陪你到天涯海角...可是我..好..困...我..爱你..</p><br>
-                    
                     <p>霸道：记住你的身份，小鬼，在这里，可是要听我的。</p><br>
-                    
                     <p>可爱：哥哥，明天你们要去海边玩，可不可以带上我...我可是..敲级敲级厉害的。</p><br>
-                    
                     <p>瘢狂：他死了？！他终于死了！我...我自由了，你们又是谁？是不是跟他一伙的，去死吧！</p><br>
-                    
                     <p>变态：你说你喜欢桃花，我就为你种下桃花。可你却喜欢他，那我就帮你把他埋在树下吧。来年的桃花一定会开的特别的漂亮。</p><br>
 					
                     <h3>🎙️ 09:22 第七部分：伪音</h3>
                     <div class="warning"><strong>考核要求：随意发挥，加分项</strong></div>
-                    <p>（一）、女性音色</p><br>
-                    <p>萝莉音：哇，好香啊，姐姐，姐姐，我想吃这个，这个，还有这个...姐姐...</p><br>
-                    
-                    <p>少女音：哎，跑那么快干嘛，你等等我呀，我都跟不上了。</p><br>
-                    
-                    <p>少御音：还真是有趣，看来他已有所察觉，计划要加快了。</p><br>
-                    
-                    <p>御姐音：都多少年了，竟有如此有趣的事，诸位可愿随我一起。</p><br>
-                    
-                    <p>女王音：本宫向来如此，尔等若还有惑，便去向先生请教吧。</p><br>
-                    
-                    <p>大妈音：哎哟，今天怎么有空出来买菜啊，要不，中午来我家吃饭吧，我一个人也吃不了多少。</p><br>
-                    
-                    <p>奶奶音：这调令乃是你父皇旨意，此去江南切莫贪玩，办完事情早日回来，还有一门亲事等你呢。</p><br>
-                    
-                    <p>女妖音:（妩媚）这次几日不见，你就忘了，可真让奴家伤心呢。</p><br>
-                    
-                    <p>老鸨音：哎哟，我的王公子啊，您可算是来了，我们花花可是等了您一宿呢。</p><br>
-                    
-                    <p>正太音：我也是有名字的，等我长大了一定要名扬天下。</p><br>
-                    
-                    <p>（二）、男性音色</p><br>
-                    
-                    <p>少年音：你们居然敢在背后说我妹妹坏话，看我不撕烂你们的嘴。</p><br>
-                    
-                    <p>公子音：不过是沧海一粟，诸位可莫要再取笑我了。</p><br>
-                    
-                    <p>大叔音：小子，我看你天赋不错，不如随我一起仗剑江湖，哎哎哎，跟你开玩笑呢。</p><br>
-                    
-                    <p>爷爷音：今日北边气象异常，又是一个多事之秋啊，我倒希望是我看错了。</p><br>
-                    
-                    <p>书生音：你们莫要再逼我了，那舞刀弄剑有什么好的，岂可如此肤浅。</p><br>
-                    
-                    <p>帝王音：诸位爱卿，对北方战事，有何见解，朕已许久不见此番景象了。</p><br>
-                    
-                    <p>太监音：主子说的当然是对的，奴才当然是主子的。</p><br>
-                    
-                    <p>男妖音：这风啊，可真轻柔，这般轻柔的感觉，还真让人怀念啊。</p><br>
-                    
-                    <p>霸总音：怎么，现在想起来是不是有点晚了，今晚，就好好躺着吧。</p><br>
+                    <p>（一）、女性音色</p><p>萝莉音：哇，好香啊，姐姐，姐姐，我想吃这个，这个，还有这个...姐姐...</p><p>少女音：哎，跑那么快干嘛，你等等我呀，我都跟不上了。</p><p>少御音：还真是有趣，看来他已有所察觉，计划要加快了。</p><p>御姐音：都多少年了，竟有如此有趣的事，诸位可愿随我一起。</p><p>女王音：本宫向来如此，尔等若还有惑，便去向先生请教吧。</p><p>大妈音：哎哟，今天怎么有空出来买菜啊，要不，中午来我家吃饭吧，我一个人也吃不了多少。</p><p>奶奶音：这调令乃是你父皇旨意，此去江南切莫贪玩，办完事情早日回来，还有一门亲事等你呢。</p><p>女妖音:（妩媚）这次几日不见，你就忘了，可真让奴家伤心呢。</p><p>老鸨音：哎哟，我的王公子啊，您可算是来了，我们花花可是等了您一宿呢。</p><p>正太音：我也是有名字的，等我长大了一定要名扬天下。</p><br>
+                    <p>（二）、男性音色</p><p>少年音：你们居然敢在背后说我妹妹坏话，看我不撕烂你们的嘴。</p><p>公子音：不过是沧海一粟，诸位可莫要再取笑我了。</p><p>大叔音：小子，我看你天赋不错，不如随我一起仗剑江湖，哎哎哎，跟你开玩笑呢。</p><p>爷爷音：今日北边气象异常，又是一个多事之秋啊，我倒希望是我看错了。</p><p>书生音：你们莫要再逼我了，那舞刀弄剑有什么好的，岂可如此肤浅。</p><p>帝王音：诸位爱卿，对北方战事，有何见解，朕已许久不见此番景象了。</p><p>太监音：主子说的当然是对的，奴才当然是主子的。</p><p>男妖音：这风啊，可真轻柔，这般轻柔的感觉，还真让人怀念啊。</p><p>霸总音：怎么，现在想起来是不是有点晚了，今晚，就好好躺着吧。</p><br>
 					
                     <center><div class="warning"><strong>10:40 感谢您参与本次的考核，御音阁欢迎您的加入!</strong></div></center>
                     <center><div class="warning"><strong>本剧所采用的音乐、音效等素材来源于互联网，如侵权请联系作者删除。<br>著作权归原作者所有，本剧仅供配音爱好者学习、交流。</strong></div></center>
@@ -769,7 +735,6 @@
 
     <script>
         (function(){
-            // 音频播放器完整逻辑
             const audio = new Audio('.././assets/audition/御音阁-考核本-考核用.mp3');
             const playBtn = document.getElementById('play-btn');
             const pauseBtn = document.getElementById('pause-btn');
@@ -779,36 +744,120 @@
             const progressBar = document.querySelector('.progress-bar');
             const currentTimeDisplay = document.getElementById('current-time');
             const totalTimeDisplay = document.getElementById('total-time');
-            const progressContainer = document.querySelector('.progress-container');
             const volumeSlider = document.getElementById('volume-slider');
             const playlistToggle = document.getElementById('playlist-toggle');
             const playlistDiv = document.getElementById('playlist');
             const playlistItems = document.querySelectorAll('.playlist-item');
+            const seekSlider = document.getElementById('seekSlider');
+            const jumpTimeInput = document.getElementById('jumpTimeInput');
+            const jumpTimeBtn = document.getElementById('jumpTimeBtn');
+            
             let isPlaying = false;
-
-            function formatTime(seconds) { if(isNaN(seconds)) return "0:00"; const mins = Math.floor(seconds/60); const secs = Math.floor(seconds%60); return `${mins}:${secs<10?'0':''}${secs}`; }
-            function updateProgressBar() { if(audio.duration){ const percent = (audio.currentTime/audio.duration)*100; progressBar.style.width = `${percent}%`; currentTimeDisplay.textContent = formatTime(audio.currentTime); } }
-            audio.addEventListener('loadedmetadata',()=>{ totalTimeDisplay.textContent = formatTime(audio.duration); });
-            audio.addEventListener('timeupdate', updateProgressBar);
-            audio.addEventListener('ended',()=>{ isPlaying=false; progressBar.style.width='0%'; currentTimeDisplay.textContent='0:00'; });
-            playBtn.addEventListener('click',()=>{ audio.play(); isPlaying=true; });
-            pauseBtn.addEventListener('click',()=>{ audio.pause(); isPlaying=false; });
-            stopBtn.addEventListener('click',()=>{ audio.pause(); audio.currentTime=0; isPlaying=false; progressBar.style.width='0%'; currentTimeDisplay.textContent='0:00'; });
-            rewindBtn.addEventListener('click',()=>{ audio.currentTime = Math.max(0, audio.currentTime-3); });
-            forwardBtn.addEventListener('click',()=>{ audio.currentTime = Math.min(audio.duration, audio.currentTime+3); });
-            if(progressContainer) progressContainer.addEventListener('click',(e)=>{ const rect = progressContainer.getBoundingClientRect(); const pos = (e.clientX - rect.left)/rect.width; audio.currentTime = pos * audio.duration; });
-            volumeSlider.addEventListener('input',()=>{ audio.volume = volumeSlider.value; });
-            playlistToggle.addEventListener('click',()=>{ playlistDiv.classList.toggle('open'); });
-            playlistItems.forEach(item=>{
-                item.addEventListener('click',function(){ const src = this.getAttribute('data-src'); if(src){ audio.src = src; audio.load(); audio.play(); isPlaying=true; playlistItems.forEach(i=>i.classList.remove('active')); this.classList.add('active'); playlistDiv.classList.remove('open'); } });
+            
+            function formatTime(seconds) {
+                if(isNaN(seconds)) return "0:00";
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            function parseTimeString(str) {
+                str = str.trim();
+                if(str.includes(':')) {
+                    let parts = str.split(':');
+                    if(parts.length === 2) {
+                        let mins = parseInt(parts[0], 10);
+                        let secs = parseInt(parts[1], 10);
+                        if(!isNaN(mins) && !isNaN(secs)) return mins * 60 + secs;
+                    }
+                } else {
+                    let secs = parseFloat(str);
+                    if(!isNaN(secs)) return secs;
+                }
+                return null;
+            }
+            
+            function syncProgressAndSlider() {
+                if(audio.duration && !isNaN(audio.duration)) {
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    progressBar.style.width = `${percent}%`;
+                    seekSlider.value = audio.currentTime;
+                    seekSlider.max = audio.duration;
+                } else {
+                    progressBar.style.width = '0%';
+                }
+                currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            }
+            
+            function updateDuration() {
+                if(audio.duration && isFinite(audio.duration)) {
+                    totalTimeDisplay.textContent = formatTime(audio.duration);
+                    seekSlider.max = audio.duration;
+                } else {
+                    totalTimeDisplay.textContent = '0:00';
+                }
+                syncProgressAndSlider();
+            }
+            
+            audio.addEventListener('loadedmetadata', updateDuration);
+            audio.addEventListener('durationchange', updateDuration);
+            audio.addEventListener('timeupdate', syncProgressAndSlider);
+            audio.addEventListener('ended', () => {
+                isPlaying = false;
+                syncProgressAndSlider();
             });
+            
+            seekSlider.addEventListener('input', function(e) {
+                const newTime = parseFloat(e.target.value);
+                if(!isNaN(newTime) && audio.duration) {
+                    audio.currentTime = Math.min(Math.max(0, newTime), audio.duration);
+                    syncProgressAndSlider();
+                }
+            });
+            
+            jumpTimeBtn.addEventListener('click', () => {
+                let raw = jumpTimeInput.value;
+                let targetSec = parseTimeString(raw);
+                if(targetSec !== null && !isNaN(targetSec) && audio.duration) {
+                    let clamped = Math.min(Math.max(0, targetSec), audio.duration);
+                    audio.currentTime = clamped;
+                    syncProgressAndSlider();
+                } else {
+                    alert('请输入有效时间，例如 1:30 或 90');
+                }
+            });
+            
+            playBtn.addEventListener('click', () => { audio.play(); isPlaying = true; });
+            pauseBtn.addEventListener('click', () => { audio.pause(); isPlaying = false; });
+            stopBtn.addEventListener('click', () => { audio.pause(); audio.currentTime = 0; isPlaying = false; syncProgressAndSlider(); });
+            rewindBtn.addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 5); syncProgressAndSlider(); });
+            forwardBtn.addEventListener('click', () => { if(audio.duration) audio.currentTime = Math.min(audio.duration, audio.currentTime + 5); syncProgressAndSlider(); });
+            volumeSlider.addEventListener('input', () => { audio.volume = volumeSlider.value; });
+            playlistToggle.addEventListener('click', () => { playlistDiv.classList.toggle('open'); });
+            
+            playlistItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const src = this.getAttribute('data-src');
+                    if(src) {
+                        audio.src = src;
+                        audio.load();
+                        audio.play().catch(e=>console.log);
+                        isPlaying = true;
+                        playlistItems.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        playlistDiv.classList.remove('open');
+                        updateDuration();
+                    }
+                });
+            });
+            
             audio.volume = 0.7;
-
-            // 交互标签提醒
+            volumeSlider.value = 0.7;
+            updateDuration();
+            
             document.querySelectorAll('.interactive-tag').forEach(tag=>{ tag.addEventListener('click',()=>{ alert(`✨ 考核项目：${tag.innerText}`); }); });
             document.querySelector('.more-works-btn')?.addEventListener('click',(e)=>{ e.preventDefault(); alert('跳转至御音阁作品集页面'); });
-
-            // 平滑滚动 & 导航栏特效 & backtop
+            
             const backTop = document.getElementById('backToTop');
             window.addEventListener('scroll',()=>{ backTop.classList.toggle('show', window.scrollY>300); const header = document.querySelector('header'); if(window.scrollY>50) header.style.backgroundColor='rgba(26,26,46,0.96)'; else header.style.backgroundColor='rgba(26,26,46,0.98)'; });
             backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
